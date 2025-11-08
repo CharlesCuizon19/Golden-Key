@@ -10,4 +10,8 @@ class PageController extends Controller
     {
         return view('pages.home');
     }
+    public function about_us()
+    {
+        return view('pages.about-us');
+    }
 }

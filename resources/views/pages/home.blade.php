@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-homepage-banner />
+    <x-banner />
 
     @include('homepage-tabs.services-tab')
 

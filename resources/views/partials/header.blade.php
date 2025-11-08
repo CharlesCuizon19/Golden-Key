@@ -1,7 +1,7 @@
 <div class="fixed z-40 w-full 2xl:absolute">
     <div class="relative flex flex-col drop-shadow-md">
         <div class="bg-[#ecc467] py-2 w-full lg:flex items-end justify-end hidden">
-            <div class="2xl:mr-[10rem] flex items-end justify-end gap-10 ">
+            <div class="2xl:mr-[7rem] flex items-end justify-end gap-10 ">
                 <div class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -38,15 +38,21 @@
             </div>
         </div>
         <header x-data="{ open: false }" class="w-full bg-white border-b border-gray-200">
-            <nav class="flex items-center justify-between lg:justify-end gap-10  px-6 py-4 2xl:mr-[8rem]">
+            <nav class="flex items-center justify-between lg:justify-end gap-10  px-6 py-4 2xl:mr-[5rem]">
 
                 <img src="{{ asset('images/logo.png') }}" alt="" class="flex size-14 2xl:size-10 lg:hidden">
 
                 <!-- Desktop Nav -->
-                <ul class="items-center hidden space-x-16 text-lg text-gray-700 md:flex">
-                    <li><a href="{{ route('home') }}"
-                            class="{{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a></li>
-                    <li><a href="#" class="hover:text-[#f37021]">About Us</a></li>
+                <ul class="items-center hidden space-x-12 text-lg text-gray-700 md:flex">
+                    <li class="relative z-[9999]">
+                        <a href="{{ route('home') }}"
+                            class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about-us') }}"
+                            class="hover:text-[#f37021] {{ Route::is('about-us') ? 'font-bold text-black' : 'font-normal' }}">About
+                            Us</a>
+                    </li>
                     <li><a href="#" class="hover:text-[#f37021]">Unit Listing</a></li>
                     <li><a href="#" class="hover:text-[#f37021]">FAQs</a></li>
                     <li><a href="#" class="hover:text-[#f37021]">Contact Us</a></li>
@@ -83,8 +89,11 @@
             <!-- Mobile Menu -->
             <div x-show="open" x-transition
                 class="flex flex-col px-6 py-4 space-y-4 bg-white border-t border-gray-200 md:hidden">
-                <a href="#" class="font-semibold text-black">Home</a>
-                <a href="#" class="hover:text-[#f37021]">About Us</a>
+                <a href="{{ route('home') }}"
+                    class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
+                <a href="{{ route('about-us') }}"
+                    class="hover:text-[#f37021] {{ Route::is('about-us') ? 'font-bold text-black' : 'font-normal' }}">About
+                    Us</a>
                 <a href="#" class="hover:text-[#f37021]">Unit Listing</a>
                 <a href="#" class="hover:text-[#f37021]">FAQs</a>
                 <a href="#" class="hover:text-[#f37021]">Contact Us</a>
@@ -107,7 +116,12 @@
                         Home
                     </a>
                 </li>
-                <li><a href="#" class="hover:text-[#f37021]">About Us</a></li>
+                <li>
+                    <a href="{{ route('about-us') }}"
+                        class="{{ Route::is('about-us') ? 'font-bold text-black' : 'font-normal' }}">
+                        About Us
+                    </a>
+                </li>
                 <li><a href="#" class="hover:text-[#f37021]">Unit Listing</a></li>
                 <li><a href="#" class="hover:text-[#f37021]">FAQs</a></li>
                 <li><a href="#" class="hover:text-[#f37021]">Contact Us</a></li>

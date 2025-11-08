@@ -15,12 +15,19 @@
     ];
 @endphp
 
-<div class="hidden lg:flex h-[65rem] w-auto">
-    <div class="swiper BannerSwiper max-w-[100%]">
+@props([
+    'page' => '',
+    'breadcrumb1' => '',
+    'breadcrumb2' => '',
+])
+
+<div class="hidden lg:flex {{ Route::is('home') ? 'h-[65rem]' : 'h-[23rem]' }} w-auto">
+    <div class="swiper {{ Route::is('home') ? 'BannerSwiper' : '' }} max-w-[100%]">
         <div class="swiper-wrapper">
             @foreach ($banners as $item)
                 <div class="swiper-slide">
-                    <img src="{{ asset($item->img) }}" alt="" class="w-full h-auto">
+                    <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}" alt=""
+                        class="object-cover w-full h-full">
                 </div>
             @endforeach
         </div>
@@ -48,7 +55,35 @@
             <div class="absolute z-[9999] top-[1rem] left-32 text-lg font-bold text-[#f37021]">
                 <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[110px]">
             </div>
-            <img src="{{ asset('images/floater.png') }}" alt="" class="w-auto ">
+            <div class="{{ Route::is('home') ? '' : 'h-[23rem] overflow-hidden' }}">
+                <img src="{{ asset('images/floater.png') }}" alt="" class="w-auto">
+            </div>
+
+            <div class="absolute bottom-5 left-[8rem] text-white">
+                <div class="flex flex-col gap-5">
+                    <div class="font-serif text-5xl">
+                        {{ $page }}
+                    </div>
+                    <div class="flex items-center gap-3 text-xl">
+                        <div class="font-thin">Home</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white size-5">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m10 17l5-5m0 0l-5-5" />
+                        </svg>
+                        <div class="font-semibold">{{ $breadcrumb1 }}</div>
+                        <div class="text-2xl">
+                            @if ($breadcrumb2)
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white size-5">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" d="m10 17l5-5m0 0l-5-5" />
+                                </svg>
+                            @endif
+                        </div>
+                        <div class="font-semibold">{{ $breadcrumb2 }}</div>
+
+                    </div>
+                </div>
+            </div>
 
             <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-32">
                 <section
@@ -144,26 +179,32 @@
 </div>
 
 {{-- MOBILE VIEW --}}
-<div class="flex lg:hidden">
-    <div class="mt-[68px]">
+<div class="h-[23rem] pt-[50px] flex lg:hidden">
+    <div class="">
         <!-- Swiper Container -->
-        <div class="max-w-screen-md min-h-full swiper mobileSwiper">
-            <div class="swiper-wrapper">
+        <div class="relative h-full max-w-screen-md swiper mobileSwiper">
+            <div class="hidden swiper-wrapper">
                 @foreach ($banners as $item)
-                    <div class="relative swiper-slide">
-                        <img src="{{ asset($item->img) }}" alt="" class="object-cover w-full h-auto ">
-                        <div class="absolute top-0 left-0">
-                            <div class="relative">
-                                <div class="absolute top-[3rem] flex items-center justify-center h-full mt-10 left-5">
-                                    <section class="py-20 text-[#20272D]">
-                                        <div class="">
-                                            <div
-                                                class="w-[20rem] mb-6 font-serif text-2xl font-medium leading-tight md:text-6xl">
-                                                {{ $item->title }}
-                                            </div>
+                    <div class="relative w-full h-full swiper-slide">
+                        <!-- Image Layer -->
+                        <div class="relative w-full h-full">
+                            <img src="{{ asset($item->img) }}" alt="" class="object-cover w-full h-full">
+
+                            <!-- Gradient OVER image but UNDER text -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-[#20272D]/60 to-transparent z-20"></div>
+                        </div>
+
+                        <!-- Title Layer -->
+                        <div class="absolute inset-0 z-30 flex items-center">
+                            <div class="ml-5 mt-[1rem] text-white">
+                                <section class="py-20">
+                                    <div>
+                                        <div
+                                            class="w-[20rem] mb-6 font-serif text-2xl font-bold leading-tight md:text-6xl">
+                                            {{ $item->title }}
                                         </div>
-                                    </section>
-                                </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -171,15 +212,15 @@
             </div>
 
             <!-- NAV BUTTONS -->
-            <div class="absolute z-20 flex gap-4 right-10 bottom-10">
-                <div class="mobile-button-prev !static p-2 border rounded-lg border-white/70 bg-white/10 group">
+            <div class="absolute z-40 flex gap-4 right-[25rem] bottom-10 h-fit">
+                <div class="mobile-button-prev !static p-2 border rounded-lg border-white/70 bg-[#20272D] group">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         class="text-white transition duration-300 size-6 group-hover:-translate-x-1">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="1.5" d="m14 7l-5 5l5 5" />
                     </svg>
                 </div>
-                <div class="mobile-button-next !static p-2 border rounded-lg border-white/70 bg-white/10 group">
+                <div class="mobile-button-next !static p-2 border rounded-lg border-white/70 bg-[#20272D] group">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         class="text-white transition duration-300 size-6 group-hover:translate-x-1">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -190,6 +231,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
