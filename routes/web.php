@@ -15,4 +15,12 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+
 Route::get('/about-us', [PageController::class, 'about_us'])->name('about-us');
+
+Route::get('/unit-listing', [PageController::class, 'unit_listing'])->name('unit-listing.all');
+Route::get('/unit-listing/{id}', [PageController::class, 'unit_listing_singlepage'])->name('unit-listing.singlepage');
+
+Route::get('/FAQs', [PageController::class, 'FAQs'])->name('FAQs');
+
+Route::get('/contact-us', [PageController::class, 'contact_us'])->name('contact-us');

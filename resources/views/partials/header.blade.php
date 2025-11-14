@@ -53,9 +53,17 @@
                             class="hover:text-[#f37021] {{ Route::is('about-us') ? 'font-bold text-black' : 'font-normal' }}">About
                             Us</a>
                     </li>
-                    <li><a href="#" class="hover:text-[#f37021]">Unit Listing</a></li>
-                    <li><a href="#" class="hover:text-[#f37021]">FAQs</a></li>
-                    <li><a href="#" class="hover:text-[#f37021]">Contact Us</a></li>
+                    <li>
+                        <a href="{{ route('unit-listing.all') }}"
+                            class="hover:text-[#f37021] {{ Route::is('unit-listing.*') ? 'font-bold text-black' : 'font-normal' }}">Unit
+                            Listing</a>
+                    </li>
+                    <li><a href="{{ route('FAQs') }}"
+                            class="hover:text-[#f37021] {{ Route::is('FAQs') ? 'font-bold text-black' : 'font-normal' }}">FAQs</a>
+                    </li>
+                    <li><a href="{{ route('contact-us') }}"
+                            class="hover:text-[#f37021] {{ Route::is('contact-us') ? 'font-bold text-black' : 'font-normal' }}">Contact
+                            Us</a></li>
                 </ul>
 
                 <!-- Desktop Actions -->
@@ -94,9 +102,14 @@
                 <a href="{{ route('about-us') }}"
                     class="hover:text-[#f37021] {{ Route::is('about-us') ? 'font-bold text-black' : 'font-normal' }}">About
                     Us</a>
-                <a href="#" class="hover:text-[#f37021]">Unit Listing</a>
-                <a href="#" class="hover:text-[#f37021]">FAQs</a>
-                <a href="#" class="hover:text-[#f37021]">Contact Us</a>
+                <a href="{{ route('unit-listing.all') }}"
+                    class="hover:text-[#f37021] {{ Route::is('unit-listing.*') ? 'font-bold text-black' : 'font-normal' }}">Unit
+                    Listing</a>
+                <a href="{{ route('FAQs') }}"
+                    class="hover:text-[#f37021] {{ Route::is('FAQs') ? 'font-bold text-black' : 'font-normal' }}">FAQs</a>
+                <a href="{{ route('contact-us') }}"
+                    class="hover:text-[#f37021] {{ Route::is('contact-us') ? 'font-bold text-black' : 'font-normal' }}">Contact
+                    Us</a>
                 <x-button buttonName="Inquire Now" route="home" />
             </div>
         </header>
@@ -122,9 +135,15 @@
                         About Us
                     </a>
                 </li>
-                <li><a href="#" class="hover:text-[#f37021]">Unit Listing</a></li>
-                <li><a href="#" class="hover:text-[#f37021]">FAQs</a></li>
-                <li><a href="#" class="hover:text-[#f37021]">Contact Us</a></li>
+                <li><a href="{{ route('unit-listing.all') }}"
+                        class="{{ Route::is('unit-listing.*') ? 'font-bold text-black' : 'font-normal' }}">Unit
+                        Listing</a></li>
+                <li><a href="{{ route('FAQs') }}"
+                        class="hover:text-[#f37021] {{ Route::is('FAQs') ? 'font-bold text-black' : 'font-normal' }}">FAQs</a>
+                </li>
+                <li><a href="{{ route('contact-us') }}"
+                        class="hover:text-[#f37021] {{ Route::is('contact-us') ? 'font-bold text-black' : 'font-normal' }}">Contact
+                        Us</a></li>
             </ul>
 
             <div class="items-center hidden space-x-4 md:flex">

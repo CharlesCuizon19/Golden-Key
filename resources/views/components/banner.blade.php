@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="absolute z-50 flex gap-4 right-40 bottom-10">
+    <div class="absolute z-50 {{ Route::is('home') ? 'flex' : 'hidden' }} gap-4 right-40 bottom-10">
         <button class="p-2 border rounded-lg customized-button-prev border-white/70 bg-white/10 group">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                 class="text-white transition duration-300 size-10 group-hover:-translate-x-1">
@@ -70,7 +70,7 @@
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="m10 17l5-5m0 0l-5-5" />
                         </svg>
-                        <div class="font-semibold">{{ $breadcrumb1 }}</div>
+                        <div class=" {{ $breadcrumb2 ? 'font-normal' : 'font-semibold' }}">{{ $breadcrumb1 }}</div>
                         <div class="text-2xl">
                             @if ($breadcrumb2)
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white size-5">
@@ -87,7 +87,7 @@
 
             <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-32">
                 <section
-                    class="py-20 text-white transition-all duration-1000 ease-in-out translate-x-10 opacity-0 form-section">
+                    class="py-20 text-white transition-all duration-1000 ease-in-out translate-x-10 opacity-0 form-section {{ Route::is('home') ? 'flex' : 'hidden' }}">
                     <div class="max-w-4xl mx-auto">
                         <div class="swiper bannerTitleSwiper">
                             <div class="swiper-wrapper">
@@ -237,17 +237,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         new Swiper('.bannerTitleSwiper', {
             slidesPerView: 1,
+            loop: true,
             allowTouchMove: false,
             simulateTouch: false,
             keyboard: {
                 enabled: false,
             },
             speed: 1000,
-            loop: true,
-            autoplay: {
-                delay: 7000,
-                disableOnInteraction: false,
-            },
             navigation: {
                 nextEl: '.customized-button-next',
                 prevEl: '.customized-button-prev',
