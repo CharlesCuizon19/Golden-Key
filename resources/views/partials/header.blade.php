@@ -96,7 +96,7 @@
 
             <!-- Mobile Menu -->
             <div x-show="open" x-transition
-                class="flex flex-col px-6 py-4 space-y-4 bg-white border-t border-gray-200 md:hidden">
+                class="relative z-50 flex flex-col px-6 py-4 space-y-4 bg-white border-t border-gray-200 md:hidden">
                 <a href="{{ route('home') }}"
                     class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
                 <a href="{{ route('about-us') }}"

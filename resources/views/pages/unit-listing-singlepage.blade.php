@@ -9,11 +9,12 @@
                 <div class="lg:col-span-3">
                     <div class="flex flex-col gap-5">
                         <div class="relative w-full h-full overflow-hidden rounded-xl">
-                            <img src="{{ asset($property->image) }}" alt="" class="object-cover w-full h-full">
+                            <img src="{{ asset($property->image) }}" alt="{{ $property->name }}"
+                                class="object-cover w-full h-full">
 
                             <div class="absolute flex bottom-5 right-5 gap-x-5">
                                 <x-gallery-modal :images="$property->image_gallery" propertyImages="false"
-                                    imageGalleryCount="{{ $imageGallery_count }}" />
+                                    imageGalleryCount="{{ $imageGallery_count }}" buttonType="overlay" />
                                 <button
                                     class="flex items-center gap-2 px-5 py-2 transition duration-300 bg-white rounded-lg drop-shadow-md hover:bg-gray-300">
                                     <div>
@@ -23,7 +24,7 @@
                                                 d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92" />
                                         </svg>
                                     </div>
-                                    <div class="text-lg font-medium">
+                                    <div class="text-sm font-medium lg:text-lg">
                                         Copy Link
                                     </div>
                                 </button>
@@ -52,11 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <x-gallery-modal :images="[$property->image_gallery]" propertyImages="true" /> --}}
-                                    {{-- @include('components.gallery-modal', [
-                                        'images' => $property->image_gallery,
-                                        'propertyImages' => 'true',
-                                    ]) --}}
+                                    <x-gallery-modal2 :images="$property->image_gallery" imageGalleryCount="{{ $imageGallery_count }}" />
                                 @endif
                             </div>
                         @endif
@@ -296,4 +293,30 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .swiper-pagination2-bullet {
+            width: 12px;
+            height: 12px;
+            background: #d9d9d9;
+            opacity: 0.6;
+        }
+
+        .swiper-pagination2-bullet-active {
+            background: #ecc467;
+            opacity: 1;
+        }
+
+        /* Active thumbnail border */
+        .thumb-swiper2 .swiper-slide-thumb-active img {
+            border: 3px solid #D3AC4E;
+            border-radius: 8px;
+        }
+
+
+        .thumb-swiper2 .swiper-slide img:hover {
+            border: 2px solid #ecc467;
+            border-radius: 8px;
+        }
+    </style>
 @endsection

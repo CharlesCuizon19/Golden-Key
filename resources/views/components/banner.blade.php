@@ -21,13 +21,17 @@
     'breadcrumb2' => '',
 ])
 
-<div class="hidden lg:flex {{ Route::is('home') ? 'h-[65rem]' : 'h-[23rem]' }} w-auto">
+<div class="{{ Route::is('home') ? 'h-[65rem] hidden lg:flex' : 'h-[23rem]  flex' }} w-auto">
     <div class="swiper {{ Route::is('home') ? 'BannerSwiper' : '' }} max-w-[100%]">
         <div class="swiper-wrapper">
             @foreach ($banners as $item)
-                <div class="swiper-slide">
+                <div class="relative w-auto swiper-slide">
                     <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}" alt=""
-                        class="object-cover w-full h-full">
+                        class="object-cover {{ Route::is('home') ? '' : 'object-right' }} w-auto h-full">
+
+                    <div
+                        class="{{ Route::is('home') ? 'hidden' : 'flex lg:hidden' }} absolute inset-0 bg-gradient-to-b from-[#20272D]/60 to-transparent z-20">
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -50,18 +54,18 @@
         </button>
     </div>
 
-    <div class="absolute top-0 left-0 z-40">
-        <div class="relative transition-all duration-1000 ease-in-out floater">
+    <div class="absolute top-0 left-0 z-10 lg:z-40">
+        <div class="relative transition-all duration-1000 ease-in-out -z-10 floater">
             <div class="absolute z-[9999] top-[1rem] left-32 text-lg font-bold text-[#f37021]">
-                <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[110px]">
+                <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[110px] lg:flex hidden">
             </div>
             <div class="{{ Route::is('home') ? '' : 'h-[23rem] overflow-hidden' }}">
-                <img src="{{ asset('images/floater.png') }}" alt="" class="w-auto">
+                <img src="{{ asset('images/floater.png') }}" alt="" class="hidden w-auto lg:flex">
             </div>
 
-            <div class="absolute bottom-5 left-[8rem] text-white">
+            <div class="absolute left-5 bottom-[7rem] lg:bottom-5 lg:left-[8rem] text-white">
                 <div class="flex flex-col gap-5">
-                    <div class="font-serif text-5xl">
+                    <div class="font-serif text-5xl text-nowrap">
                         {{ $page }}
                     </div>
                     <div class="flex items-center gap-3 text-xl">
@@ -179,7 +183,7 @@
 </div>
 
 {{-- MOBILE VIEW --}}
-<div class="h-[23rem] pt-[50px] flex lg:hidden">
+<div class="{{ Route::is('home') ? 'flex' : 'hidden' }} h-[23rem] pt-[50px] flex lg:hidden">
     <div class="">
         <!-- Swiper Container -->
         <div class="relative h-full max-w-screen-md swiper mobileSwiper">

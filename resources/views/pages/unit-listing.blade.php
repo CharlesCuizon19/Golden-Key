@@ -340,8 +340,9 @@
                                         class="flex flex-col gap-3 cursor-pointer group">
                                         <div class="relative">
                                             <div class="overflow-hidden rounded-lg">
-                                                <img src="{{ asset($item->image) }}" loading="lazy"
-                                                    class="w-full h-[20rem] object-cover transition duration-500 group-hover:scale-105">
+                                                <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
+                                                    loading="lazy"
+                                                    class="w-full h-[20rem] text-center object-cover transition duration-500 group-hover:scale-105">
                                             </div>
                                             <div
                                                 class="absolute top-3 left-3 px-4 py-2 text-sm text-black rounded-lg 2xl:text-base {{ $item->status === 'For Sale'

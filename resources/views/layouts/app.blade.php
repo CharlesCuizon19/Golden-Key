@@ -29,4 +29,30 @@
     @include('partials.footer')
 </body>
 
+<style>
+    .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: #d9d9d9;
+        opacity: 0.6;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #ecc467;
+        opacity: 1;
+    }
+
+    /* Active thumbnail border */
+    .thumb-swiper2 .swiper-slide-thumb-active img {
+        border: 3px solid #D3AC4E;
+        border-radius: 8px;
+    }
+
+
+    .thumb-swiper2 .swiper-slide img:hover {
+        border: 2px solid #ecc467;
+        border-radius: 8px;
+    }
+</style>
+
 </html>

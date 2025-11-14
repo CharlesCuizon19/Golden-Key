@@ -92,7 +92,7 @@
     </div>
 </div>
 
-<style>
+{{-- <style>
     .swiper-pagination-bullet {
         width: 12px;
         height: 12px;
@@ -104,7 +104,7 @@
         background: #ecc467;
         opacity: 1;
     }
-</style>
+</style> --}}
 
 
 <!-- Swiper Init -->
