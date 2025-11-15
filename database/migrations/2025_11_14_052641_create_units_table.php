@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreignId('unit_type_id')->nullable()->constrained('unit_types')->onDelete('set null');
             $table->string('title');
             $table->decimal('sqm', 8, 2);
-            $table->integer('bedroom')->default(1);
-            $table->integer('bathrooms')->default(1);
             $table->decimal('price', 15, 2);
             $table->enum('status', ['for_sale', 'for_rent', 'for_lease'])->default('for_sale');
             $table->string('location_text')->nullable();

@@ -107,7 +107,8 @@
             <div id="existing-images" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
                 @foreach($unit->images as $img)
                 <div class="relative w-full h-40 rounded-lg border border-gray-700">
-                    <img src="{{ asset('uploads/units/' . $img->image) }}" class="w-full h-full object-cover">
+                    <img src="{{ asset($img->image_path) }}" class="w-full h-full object-cover">
+
 
                     <button type="button"
                         class="absolute bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs hover:bg-red-700"

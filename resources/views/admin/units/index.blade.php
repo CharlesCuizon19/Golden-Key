@@ -19,19 +19,6 @@
     </a>
 </div>
 
-<!-- Alerts -->
-@if(session('success'))
-<div class="mb-4 bg-green-600 text-white p-3 rounded-lg">
-    {{ session('success') }}
-</div>
-@endif
-
-@if(session('error'))
-<div class="mb-4 bg-red-600 text-white p-3 rounded-lg">
-    {{ session('error') }}
-</div>
-@endif
-
 <!-- Units Table -->
 <div class="overflow-x-auto bg-[#1a1a1a] border border-[#2c2c2c] rounded-lg shadow">
     <table class="table-fixed w-full border-collapse text-center" id="units-table">
@@ -60,21 +47,34 @@
 
                 <!-- Status Badge -->
                 <td class="px-6 py-3">
-                    <span class="px-3 py-1 rounded-lg text-sm text-white 
-                        {{ $unit->status == 'available' ? 'bg-green-600' : ($unit->status == 'sold' ? 'bg-red-600' : 'bg-yellow-500') }}">
-                        {{ ucfirst($unit->status) }}
+                    @php
+                    $statusColors = [
+                    'for_sale' => 'bg-green-600',
+                    'for_rent' => 'bg-blue-500',
+                    'for_lease' => 'bg-yellow-500',
+                    ];
+                    @endphp
+                    <span class="px-3 py-1 rounded-lg text-sm text-white {{ $statusColors[$unit->status] ?? 'bg-gray-500' }}">
+                        {{ str_replace('_', ' ', ucfirst($unit->status)) }}
                     </span>
                 </td>
 
+
                 <!-- Image -->
                 <td class="px-6 py-3">
-                    @if($unit->images->first())
-                    <img src="{{ asset($unit->images->first()->image_path) }}"
-                        class="h-12 w-16 object-cover mx-auto rounded-md border border-gray-700">
+                    @if($unit->images->count())
+                    <div class="flex items-center justify-center space-x-2">
+                        <img src="{{ asset($unit->images->first()->image_path) }}"
+                            class="h-12 w-16 object-cover rounded-md border border-gray-700">
+                        @if($unit->images->count() > 1)
+                        <span class="text-gray-400 text-sm">+{{ $unit->images->count() - 1 }} more</span>
+                        @endif
+                    </div>
                     @else
                     <span class="text-gray-400">—</span>
                     @endif
                 </td>
+
 
                 <!-- Action Buttons -->
                 <td>
@@ -103,6 +103,9 @@
 @endsection
 
 @push('scripts')
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     function confirmDelete(unitId) {
         Swal.fire({
@@ -158,5 +161,24 @@
             }]
         });
     });
+
+    // SweetAlert2 notifications for session messages
+    @if(session('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: "{{ session('success') }}",
+        confirmButtonColor: '#ecc467',
+    });
+    @endif
+
+    @if(session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: "{{ session('error') }}",
+        confirmButtonColor: '#ecc467',
+    });
+    @endif
 </script>
 @endpush

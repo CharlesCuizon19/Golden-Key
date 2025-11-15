@@ -14,8 +14,6 @@ class Unit extends Model
         'sqm',
         'location_text',
         'location_embedded',
-        'bedroom',
-        'bathrooms',
         'price',
         'status',
         'agent_id',
@@ -36,5 +34,12 @@ class Unit extends Model
     public function images()
     {
         return $this->hasMany(UnitImage::class);
+    }
+
+    public function features()
+    {
+        return $this->belongsToMany(UnitFeature::class, 'unit_features_unit', 'unit_id', 'unit_feature_id')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }

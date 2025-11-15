@@ -6,15 +6,15 @@
 <div class="max-w-screen-xl mx-auto bg-[#121212] p-10 rounded-2xl shadow-xl border border-gray-800">
     <h1 class="text-3xl font-extrabold mb-8 text-[#ecc467] tracking-wide">CREATE UNIT</h1>
 
-    <form action="{{ route('admin.units.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+    <form action="{{ route('admin.units.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8" x-data="unitFeatureHandler()">
         @csrf
 
         {{-- Title --}}
         <div>
             <label class="block text-sm text-gray-300 mb-2 font-medium">Unit Title</label>
-            <input type="text" name="title"
+            <input type="text" name="title" placeholder="Enter unit title"
                 class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
-                placeholder="Enter unit title" required>
+                required>
             @error('title') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
         </div>
 
@@ -46,23 +46,10 @@
         </div>
 
         {{-- Specifications --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-6">
             <div>
                 <label class="block text-sm text-gray-300 mb-2">SQM</label>
-                <input type="number" name="sqm"
-                    class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
-                    placeholder="ex: 45">
-            </div>
-
-            <div>
-                <label class="block text-sm text-gray-300 mb-2">Bedrooms</label>
-                <input type="number" name="bedroom"
-                    class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition">
-            </div>
-
-            <div>
-                <label class="block text-sm text-gray-300 mb-2">Bathrooms</label>
-                <input type="number" name="bathrooms"
+                <input type="number" name="sqm" placeholder="ex: 45"
                     class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition">
             </div>
         </div>
@@ -70,9 +57,8 @@
         {{-- Price --}}
         <div>
             <label class="block text-sm text-gray-300 mb-2">Price</label>
-            <input type="number" name="price"
-                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
-                placeholder="ex: 3500000">
+            <input type="number" name="price" placeholder="ex: 3500000"
+                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition">
         </div>
 
         {{-- Status --}}
@@ -89,19 +75,42 @@
         {{-- Location Address --}}
         <div>
             <label class="block text-sm text-gray-300 mb-2 font-medium">Location Address</label>
-            <input type="text" name="location_text"
-                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
-                placeholder="Enter address manually">
+            <input type="text" name="location_text" placeholder="Enter address manually"
+                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition">
             @error('location_text') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
         </div>
 
         {{-- Location Embedded --}}
         <div>
-            <label class="block text-sm text-gray-300 mb-2 font-medium">Google Maps Embed (iframe code)</label>
-            <textarea name="location_embedded"
-                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
-                placeholder="Paste Google Maps iframe or link here..." rows="4"></textarea>
+            <label class="block text-sm text-gray-300 mb-2 font-medium">Google Maps Embed (iframe)</label>
+            <textarea name="location_embedded" placeholder="Paste Google Maps iframe or link here..." rows="4"
+                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"></textarea>
             @error('location_embedded') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+        </div>
+
+        {{-- Unit Features --}}
+        <div class="border border-gray-700 rounded-lg p-5 bg-[#1a1a1a]">
+            <h2 class="text-lg text-[#ecc467] font-semibold mb-4">Unit Features</h2>
+
+            <template x-for="(feature, index) in selectedFeatures" :key="index">
+                <div class="flex gap-4 mb-3 items-center">
+                    <select :name="`features[${index}][id]`" x-model="feature.id"
+                        class="bg-[#121212] text-white border border-gray-700 rounded-lg px-3 py-2 w-2/3 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition">
+                        <option value="" disabled>Select feature</option>
+                        @foreach($features as $f)
+                        <option value="{{ $f->id }}">{{ $f->feature_name }}</option>
+                        @endforeach
+                    </select>
+                    <input type="number" min="1" :name="`features[${index}][quantity]`" x-model="feature.quantity"
+                        class="bg-[#121212] text-white border border-gray-700 rounded-lg px-3 py-2 w-1/3 focus:ring-2 focus:ring-[#ecc467] focus:border-[#ecc467] transition"
+                        placeholder="Qty" required>
+                    <button type="button" @click="removeFeature(index)"
+                        class="px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition">Remove</button>
+                </div>
+            </template>
+
+            <button type="button" @click="addFeature()"
+                class="px-4 py-2 bg-[#ecc467] hover:bg-[#e6b857] text-black rounded-lg font-semibold transition mt-2">Add Feature</button>
         </div>
 
         {{-- Image Upload --}}
@@ -130,53 +139,46 @@
                 Save Unit
             </button>
         </div>
-
     </form>
 </div>
 @endsection
 
 @push('scripts')
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
+    // Image preview handler
     const imagesInput = document.getElementById('images');
     const previewContainer = document.getElementById('preview-container');
     let filesArray = [];
 
     imagesInput.addEventListener('change', function(e) {
-        const newFiles = Array.from(e.target.files);
-        filesArray = filesArray.concat(newFiles);
+        filesArray = Array.from(e.target.files);
         updatePreview();
     });
 
     function updatePreview() {
         previewContainer.innerHTML = '';
-
         filesArray.forEach((file, index) => {
             const reader = new FileReader();
             reader.onload = function(evt) {
-                // Wrapper div for positioning
                 const wrapper = document.createElement('div');
-                wrapper.className = 'relative w-full h-40 overflow-visible rounded-lg border border-gray-700';
+                wrapper.className = 'relative w-full h-40 rounded-lg border border-gray-700 overflow-hidden';
 
-                // Image element
                 const img = document.createElement('img');
                 img.src = evt.target.result;
                 img.className = 'w-full h-full object-cover';
 
-                // Remove button
                 const removeBtn = document.createElement('button');
                 removeBtn.type = 'button';
                 removeBtn.innerHTML = '✖';
-                removeBtn.className = 'absolute bg-red-600 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center hover:bg-red-700 shadow-lg transition';
-
-                // Move the button outside the top-right corner
+                removeBtn.className = 'absolute bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs hover:bg-red-700 shadow-lg transition';
                 removeBtn.style.top = '-12px';
                 removeBtn.style.right = '-12px';
-                removeBtn.style.zIndex = '10';
-
                 removeBtn.addEventListener('click', () => {
                     filesArray.splice(index, 1);
                     updatePreview();
-                    imagesInput.value = ''; // reset input
                 });
 
                 wrapper.appendChild(img);
@@ -186,5 +188,40 @@
             reader.readAsDataURL(file);
         });
     }
+
+    // Alpine.js for features
+    function unitFeatureHandler() {
+        return {
+            selectedFeatures: [],
+            addFeature() {
+                this.selectedFeatures.push({
+                    id: '',
+                    quantity: 1
+                });
+            },
+            removeFeature(index) {
+                this.selectedFeatures.splice(index, 1);
+            }
+        }
+    }
+
+    // SweetAlert2 messages
+    @if(session('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: "{{ session('success') }}",
+        confirmButtonColor: '#ecc467',
+    });
+    @endif
+
+    @if(session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: "{{ session('error') }}",
+        confirmButtonColor: '#ecc467',
+    });
+    @endif
 </script>
 @endpush

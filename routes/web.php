@@ -10,6 +10,7 @@ use App\Http\Controllers\InquiryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UnitFeatureController;
 use App\Http\Controllers\UnitTypeController;
 use App\Models\ContactUs;
 
@@ -47,5 +48,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('contact-us', ControllersContactUsController::class);
     Route::resource('unit-type', UnitTypeController::class);
     Route::resource('units', UnitController::class);
+     Route::resource('unit-feature', UnitFeatureController::class);
     Route::resource('agents', AgentController::class);
 });
