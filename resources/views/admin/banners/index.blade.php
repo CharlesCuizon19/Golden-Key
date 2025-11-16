@@ -23,10 +23,10 @@
     <table class="table-fixed w-full border-collapse" id="banners-table">
         <thead>
             <tr class="bg-[#1a1a1a] text-white text-sm font-semibold">
-                <th class="px-10 py-3 rounded-tl-lg text-center w-16">ID</th>
+                <th class="px-10 py-3 rounded-tl-lg text-center w-1/4">ID</th>
                 <th class="px-10 py-3 w-1/4 ">Title</th>
                 <th class="px-10 py-3 w-1/4 text-center">Image</th>
-                <th class="px-10 py-3 rounded-tr-lg text-center w-40">Actions</th>
+                <th class="px-10 py-3 rounded-tr-lg text-center w-1/4">Actions</th>
             </tr>
         </thead>
         <tbody>
