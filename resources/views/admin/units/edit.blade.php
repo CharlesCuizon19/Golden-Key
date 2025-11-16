@@ -61,12 +61,30 @@
             </div>
         </div>
 
-        {{-- Price --}}
-        <div>
-            <label class="block text-sm text-gray-300 mb-2">Price</label>
-            <input type="number" name="price" value="{{ $unit->price }}"
-                class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5">
+        {{-- Price + Price Status --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{-- Price --}}
+            <div>
+                <label class="block text-sm text-gray-300 mb-2">Price</label>
+                <input type="number" name="price" value="{{ $unit->price }}"
+                    class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5"
+                    required>
+                @error('price') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+            </div>
+
+            {{-- Price Status --}}
+            <div>
+                <label class="block text-sm text-gray-300 mb-2 font-medium">Price Status</label>
+                <select name="price_status"
+                    class="w-full bg-[#1a1a1a] text-white border border-gray-700 rounded-lg px-4 py-2.5"
+                    required>
+                    <option value="fixed" {{ $unit->price_status == 'fixed' ? 'selected' : '' }}>Fixed</option>
+                    <option value="monthly" {{ $unit->price_status == 'monthly' ? 'selected' : '' }}>Monthly</option>
+                </select>
+                @error('price_status') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+            </div>
         </div>
+
 
         {{-- Status --}}
         <div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->decimal('sqm', 8, 2);
             $table->decimal('price', 15, 2);
+            $table->enum('price_status', ['fixed', 'monthly'])->default('fixed');
             $table->enum('status', ['for_sale', 'for_rent', 'for_lease'])->default('for_sale');
             $table->string('location_text')->nullable();
             $table->text('location_embedded')->nullable();

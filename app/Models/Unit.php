@@ -15,6 +15,7 @@ class Unit extends Model
         'location_text',
         'location_embedded',
         'price',
+        'price_status',
         'status',
         'agent_id',
         'unit_type_id',

@@ -29,7 +29,7 @@
                 <th class="px-6 py-3">Type</th>
                 <th class="px-6 py-3">Price</th>
                 <th class="px-6 py-3">Status</th>
-                <th class="px-6 py-3 w-20 rounded-tl-lg">Unit Images</th>
+                <th class="px-6 py-3 rounded-tl-lg">Unit Images</th>
                 <th class="px-6 py-3 w-40 rounded-tr-lg">Actions</th>
             </tr>
         </thead>
