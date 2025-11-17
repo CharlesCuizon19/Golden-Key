@@ -5,7 +5,7 @@
             <x-title title="Frequently Asked Questions" />
             <div class="grid items-start grid-cols-1 gap-20 lg:grid-cols-2">
                 <div class="flex flex-col gap-8">
-                    <div class="text-xl 2xl:text-6xl text-[#20272D] font-serif lg:w-[80%]">
+                    <div class="text-3xl lg:text-5xl 2xl:text-7xl text-[#20272D] font-serif lg:w-[80%]">
                         Know More Before You Move In
                     </div>
                     <div class="overflow-hidden shadow-md rounded-2xl w-full lg:w-[45rem] mt-4 lg:mt-20">
@@ -24,14 +24,16 @@
         ['id' => 4, 'question' => 'What are the requirements to rent or lease a unit?', 'answer' => 'Requirements include valid identification, proof of income, and a signed lease agreement. Additional documents may be requested depending on the property.'],
         ['id' => 5, 'question' => 'Can you assist with property investment opportunities?', 'answer' => 'Absolutely! We offer consultancy services and market insights to help clients make informed investment decisions tailored to their financial goals.'],
     ] as $faq)
-                        <div class="overflow-hidden text-sm transition-all duration-300 border rounded-lg lg:text-xl"
+                        <div class="overflow-hidden text-lg transition-all duration-300 border rounded-lg lg:text-xl"
                             :class="open === {{ $faq['id'] }} ? 'shadow-lg' : 'shadow-none'">
                             <button @click="open === {{ $faq['id'] }} ? open = null : open = {{ $faq['id'] }}"
                                 class="flex items-center justify-between w-full px-6 py-4 font-semibold text-left transition"
                                 :class="open === {{ $faq['id'] }} ?
                                     'bg-[#ecc467] text-gray-900' :
                                     'bg-[#ebebeb] text-gray-800 hover:bg-gray-200'">
-                                <span>{{ $faq['question'] }}</span>
+                                <span :class="open === {{ $faq['id'] }} ? 'font-bold' : 'font-normal'">
+                                    {{ $faq['question'] }}
+                                </span>
                                 <span x-text="open === {{ $faq['id'] }} ? '−' : '+'"></span>
                             </button>
 

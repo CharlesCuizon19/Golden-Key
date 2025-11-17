@@ -25,8 +25,8 @@
     <div class="swiper {{ Route::is('home') ? 'BannerSwiper' : '' }} max-w-[100%]">
         <div class="swiper-wrapper">
             @foreach ($banners as $item)
-                <div class="relative w-auto h swiper-slide">
-                    <div class="w-full h-[65rem]">
+                <div class="relative w-auto swiper-slide">
+                    <div class="w-full {{ Route::is('home') ? 'h-[65rem]' : 'h-full' }}">
                         <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}"
                             alt=""
                             class="object-cover {{ Route::is('home') ? '' : 'object-right' }} w-full h-full">
@@ -57,21 +57,23 @@
         </button>
     </div>
 
-    <div class="absolute top-0 left-0 z-10 lg:z-40">
+    <div
+        class="absolute top-0 z-10 left-0 md:-left-[15rem] xl:-left-[20rem] 2xl:left-0 lg:z-40 pointer-events-none h-[65rem] overflow-hidden">
         <div class="relative transition-all duration-1000 ease-in-out -z-10 floater">
-            <div class="absolute z-[9999] top-[1rem] left-32 text-lg font-bold text-[#f37021]">
+            <div
+                class="absolute z-[9999] top-[1rem] left-[20rem] xl:left-[22rem] 2xl:left-32 text-lg font-bold text-[#f37021]">
                 <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[110px] lg:flex hidden">
             </div>
             <div class="{{ Route::is('home') ? '' : 'h-[23rem] overflow-hidden' }}">
                 <img src="{{ asset('images/floater.png') }}" alt="" class="hidden w-auto lg:flex">
             </div>
 
-            <div class="absolute left-5 bottom-[7rem] lg:bottom-5 lg:left-[8rem] text-white">
+            <div class="absolute left-5 bottom-[7rem] lg:bottom-5 xl:left-[27rem] 2xl:left-[8rem] text-white">
                 <div class="flex flex-col gap-5">
                     <div class="font-serif text-5xl text-nowrap">
                         {{ $page }}
                     </div>
-                    <div class="flex items-center gap-3 text-xl">
+                    <div class="flex items-center gap-3 text-lg text-nowrap">
                         <div class="font-thin">Home</div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white size-5">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -92,15 +94,15 @@
                 </div>
             </div>
 
-            <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-32">
+            <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-[22rem] 2xl:left-32">
                 <section
                     class="py-20 text-white transition-all duration-1000 ease-in-out translate-x-10 opacity-0 form-section {{ Route::is('home') ? 'flex' : 'hidden' }}">
-                    <div class="max-w-4xl mx-auto">
+                    <div class="max-w-3xl mx-auto">
                         <div class="swiper bannerTitleSwiper">
                             <div class="swiper-wrapper">
                                 @foreach ($banners as $item)
                                     <div class=" swiper-slide">
-                                        <h2 class="mb-6 font-serif text-5xl font-medium leading-loose md:text-6xl">
+                                        <h2 class="mb-6 font-serif font-medium leading-loose xl:text-4xl 2xl:text-6xl">
                                             {{ $item->title }}
                                         </h2>
                                     </div>
@@ -114,7 +116,7 @@
                         </p>
 
                         <!-- Form -->
-                        <form class="grid gap-8  md:grid-cols-2 w-[70%]">
+                        <form class="grid gap-8  md:grid-cols-2 w-[60%] 2xl:w-[70%]">
                             <!-- Full Name -->
                             <div>
                                 <label class="block mb-1 text-lg font-medium text-gray-200">
@@ -189,7 +191,7 @@
 <div class="{{ Route::is('home') ? 'flex' : 'hidden' }} h-[23rem] pt-[50px] flex lg:hidden">
     <div class="">
         <!-- Swiper Container -->
-        <div class="relative h-full max-w-screen-md swiper mobileSwiper">
+        <div class="relative w-full h-full max-w-screen-lg swiper mobileSwiper">
             <div class="hidden swiper-wrapper">
                 @foreach ($banners as $item)
                     <div class="relative w-full h-full swiper-slide">
@@ -207,7 +209,7 @@
                                 <section class="py-20">
                                     <div>
                                         <div
-                                            class="w-[20rem] mb-6 font-serif text-2xl font-bold leading-tight md:text-6xl">
+                                            class="w-[20rem] md:w-1/2 mb-6 font-serif text-2xl md:text-4xl font-bold leading-tight">
                                             {{ $item->title }}
                                         </div>
                                     </div>
@@ -219,7 +221,7 @@
             </div>
 
             <!-- NAV BUTTONS -->
-            <div class="absolute z-40 flex gap-4 right-[25rem] bottom-10 h-fit">
+            <div class="absolute z-40 flex gap-4 right-[5rem] bottom-10 h-fit">
                 <div class="mobile-button-prev !static p-2 border rounded-lg border-white/70 bg-[#20272D] group">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         class="text-white transition duration-300 size-6 group-hover:-translate-x-1">
@@ -239,6 +241,12 @@
     </div>
 </div>
 
+<style>
+    .your-triangle-class,
+    .your-triangle-class img {
+        pointer-events: none;
+    }
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

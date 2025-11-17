@@ -3,8 +3,8 @@
         <x-title title="Our Services" />
     </div>
 
-    <div class="container grid items-center justify-center grid-cols-1 gap-10 mx-auto 2xl:gap-0 2xl:grid-cols-3 ">
-        <div class="grid justify-center grid-cols-4 gap-5 2xl:flex">
+    <div class="container grid items-center justify-center grid-cols-1 gap-10 mx-auto 2xl:gap-0 xl:grid-cols-3 ">
+        <div class="flex justify-center gap-5">
             <div class="col-span-1">
                 <img src="{{ asset('images/service-icon1.png') }}" alt="" class="w-16 h-auto">
             </div>
@@ -12,13 +12,13 @@
                 <div class="font-serif text-xl 2xl:text-4xl">
                     Project Marketing
                 </div>
-                <div class="text-sm 2xl:text-xl 2xl:w-[20rem]">
+                <div class="text-lg 2xl:text-xl 2xl:w-[20rem]">
                     Promoting residential and mixed-use developments to boost visibility, attract buyers, and maximize
                     sales.
                 </div>
             </div>
         </div>
-        <div class="grid justify-center grid-cols-4 gap-5 2xl:flex">
+        <div class="flex justify-center gap-5 ">
             <div class="col-span-1">
                 <img src="{{ asset('images/service-icon2.png') }}" alt="" class="w-16 h-auto">
             </div>
@@ -26,12 +26,12 @@
                 <div class="font-serif text-xl 2xl:text-4xl">
                     Sales and Marketing
                 </div>
-                <div class="text-sm 2xl:text-xl 2xl:w-[20rem]">
+                <div class="text-lg 2xl:text-xl 2xl:w-[20rem]">
                     Connecting buyers and investors with high-value properties through digital and on-ground strategies.
                 </div>
             </div>
         </div>
-        <div class="grid justify-center grid-cols-4 gap-5 2xl:flex">
+        <div class="flex justify-center gap-5 ">
             <div class="col-span-1">
                 <img src="{{ asset('images/service-icon3.png') }}" alt="" class="w-16 h-auto">
             </div>
@@ -39,7 +39,7 @@
                 <div class="font-serif text-xl 2xl:text-4xl">
                     Property & Investment Management
                 </div>
-                <div class="text-sm 2xl:text-xl 2xl:w-[20rem]">
+                <div class="text-lg 2xl:text-xl 2xl:w-[20rem]">
                     Helping clients manage, rent, and grow their assets through our Golden Key App.
                 </div>
             </div>

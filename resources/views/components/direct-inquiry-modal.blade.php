@@ -19,7 +19,7 @@
 
             <!-- Modal box -->
             <div @click.stop x-transition.scale.origin.center
-                class="relative z-10 w-full max-w-2xl max-h-[90%] overflow-y-auto bg-[#101317] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
+                class="relative z-10 w-full max-w-2xl max-h-[90%] overflow-y-auto bg-[#1a2127] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
                 <!-- Header -->
                 <div class="sticky top-0 flex items-center justify-between px-6 py-4 bg-[#1a2127]">
                     <h2 class="text-2xl font-semibold text-white">Direct Inquiry</h2>
@@ -106,7 +106,7 @@
                     </div>
                 </form>
 
-                <div class="absolute inset-0 w-full h-full mt-16 -z-10">
+                <div class="absolute inset-0 hidden w-full h-full mt-16 -z-10 lg:flex">
                     <img src="{{ asset('images/modal-bg.png') }}" alt="" class="object-cover w-full h-full" />
                 </div>
 

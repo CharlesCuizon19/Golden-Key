@@ -5,14 +5,14 @@
         <x-banner page="Contact Us" breadcrumb1="Contact Us" />
 
         <div class="py-20">
-            <div class="grid grid-cols-5 pb-20 mx-3 2xl:mx-20 gap-x-20">
-                <div class="flex flex-col justify-between col-span-3">
+            <div class="grid grid-cols-5 pb-20 mx-3 2xl:mx-20 gap-x-20 gap-y-20">
+                <div class="flex flex-col justify-between col-span-5 gap-5 lg:gap-0 lg:col-span-3">
                     <div class="flex flex-col gap-5 text-[#20272d]">
                         <x-title title="Get in Touch" />
-                        <div class="font-serif leading-snug text-7xl">
+                        <div class="font-serif text-4xl leading-snug lg:text-5xl xl:text-7xl">
                             Let's Talk About Your Next Property Move
                         </div>
-                        <div class="text-2xl leading-snug">
+                        <div class="text-lg leading-snug lg:text-2xl">
                             Whether you’re looking to buy, sell, rent, or have your property managed, Golden Key Real Estate
                             and
                             Development is here to assist you. Our team of experts is dedicated to providing personalized
@@ -32,10 +32,10 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col">
-                                        <div class="text-2xl font-bold">
+                                        <div class="text-lg font-bold lg:text-2xl">
                                             Phone No.
                                         </div>
-                                        <div class="text-2xl">
+                                        <div class="text-lg lg:text-2xl">
                                             09969711881
                                         </div>
                                     </div>
@@ -51,10 +51,10 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col">
-                                        <div class="text-2xl font-bold">
+                                        <div class="text-lg font-bold lg:text-2xl">
                                             Address
                                         </div>
-                                        <div class="text-2xl">
+                                        <div class="text-lg lg:text-2xl">
                                             3A Siargao Tower Palm Beach West
                                         </div>
                                     </div>
@@ -68,25 +68,25 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col">
-                                        <div class="text-2xl font-bold">
+                                        <div class="text-lg font-bold lg:text-2xl">
                                             Email Address
                                         </div>
-                                        <div class="text-2xl">
+                                        <div class="text-lg lg:text-2xl">
                                             goldenkey.realestate777@gmail.com
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute inset-0 -z-10">
+                        <div class="absolute inset-0 hidden -z-10 xl:flex">
                             <img src="{{ asset('images/contact-us-map.png') }}" alt="">
                         </div>
                     </div>
                 </div>
 
-                <div class="relative z-0 flex flex-col col-span-2 gap-5 overflow-hidden rounded-3xl">
+                <div class="relative z-0 flex flex-col col-span-5 gap-5 overflow-hidden lg:col-span-2 rounded-3xl">
                     <form class="p-10 space-y-5">
-                        <p class="font-bold text-white 2xl:text-[43px] pb-7">Tell Us How We Can Help.</p>
+                        <p class="font-bold text-white text-2xl lg:text-[43px] pb-7">Tell Us How We Can Help.</p>
 
                         <div class="space-y-10">
                             <div>
@@ -149,7 +149,7 @@
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.9882121310916!2d120.98642177592575!3d14.542666778490762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c90046dfeccf%3A0x432e42529411a7f6!2sSiargao%20Tower%20-%20Palm%20Beach%20West!5e0!3m2!1sen!2sph!4v1762936981050!5m2!1sen!2sph"
                     style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    class="w-full h-auto 2xl:h-[30rem]"></iframe>
+                    class="w-full h-[15rem] md:h-[30rem]"></iframe>
             </div>
         </div>
     </div>

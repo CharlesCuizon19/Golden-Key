@@ -35,7 +35,7 @@
 
                 {{-- Navigation --}}
                 <div class=" absolute z-40 w-full top-[45%]">
-                    <div class="flex justify-between w-full">
+                    <div class="justify-between hidden w-full lg:flex">
                         <button
                             class="p-2 border rounded-lg border-[#D3AC4E]/70 bg-white/10 group ml-5 customized-button-prev">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

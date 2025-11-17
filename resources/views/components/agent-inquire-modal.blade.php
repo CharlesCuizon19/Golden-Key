@@ -32,7 +32,7 @@
 
             <!-- Modal box -->
             <div @click.stop x-transition.scale.origin.center
-                class="relative z-10 w-full max-w-4xl max-h-full overflow-y-auto bg-[#101317] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
+                class="relative z-10 w-full max-w-4xl max-h-full overflow-y-auto bg-[#1a2127] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
                 <!-- Header -->
                 <div class="sticky top-0 flex items-center justify-end px-6 py-4 bg-[#1a2127]">
                     <button @click="open = false" class="text-2xl leading-none text-gray-400 hover:text-white">
@@ -43,7 +43,7 @@
                 <!-- Body -->
                 <form class="p-6 space-y-5">
                     <div class="grid grid-cols-1 gap-5 xl:grid-cols-2">
-                        <div class="relative">
+                        <div class="relative z-10">
                             <div class="overflow-hidden rounded-lg">
                                 <img src="{{ asset($property->image) }}" alt="{{ $property->name }}" loading="lazy"
                                     class="w-full h-[15rem] text-center object-cover transition duration-500 group-hover:scale-105">
@@ -178,7 +178,7 @@
                     </div>
                 </form>
 
-                <div class="absolute inset-0 w-full h-full -z-10">
+                <div class="absolute inset-0 hidden w-full h-full lg:flex -z-10">
                     <img src="{{ asset('images/modal-bg.png') }}" alt=""
                         class="object-cover w-full h-full" />
                 </div>

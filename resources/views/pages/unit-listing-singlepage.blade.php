@@ -24,7 +24,7 @@
                                                 d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92" />
                                         </svg>
                                     </div>
-                                    <div class="text-sm font-medium lg:text-lg">
+                                    <div class="text-lg font-medium lg:text-lg">
                                         Copy Link
                                     </div>
                                 </button>
@@ -63,23 +63,34 @@
                     <div class="bg-[#e6e6e6] w-fit text-lg px-3 py-1 rounded-full">
                         {{ $property->type }}
                     </div>
-                    <div class="text-5xl font-bold">
+                    <div class="text-4xl font-bold xl:text-5xl">
                         {{ $property->name }}
                     </div>
-                    <div class="flex flex-col gap-5">
-                        <div class="text-2xl leading-snug text-black/80 line-clamp-5">
+                    <div x-data="{ expanded: false }" class="flex flex-col gap-5">
+
+                        <!-- Description -->
+                        <div :class="expanded ? 'line-clamp-none' : 'line-clamp-5'"
+                            class="text-lg leading-snug transition-all duration-300 lg:text-2xl text-black/80">
                             {{ $property->property_desc }}
                         </div>
-                        <div class="flex items-center gap-2">
-                            <div class="text-2xl font-bold text-black/80">
-                                Read More
+
+                        <!-- Read More / Less Button -->
+                        <div class="flex items-center gap-2 cursor-pointer select-none" @click="expanded = !expanded">
+
+                            <div class="text-lg font-bold lg:text-2xl text-black/80">
+                                <span x-text="expanded ? 'Read Less' : 'Read More'"></span>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                :class="expanded ? 'rotate-180' : ''" class="transition-transform duration-300">
                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="1.5" d="m7 10l5 5l5-5" />
                             </svg>
+
                         </div>
+
                     </div>
+
                     <div class="flex flex-col gap-5 mt-7">
                         <x-title title="Facilities" />
                         <div class="flex flex-wrap gap-16">
@@ -91,14 +102,14 @@
                                         <path d="M7 8a2 2 0 1 1-1.995 2.15L5 10l.005-.15A2 2 0 0 1 7 8" />
                                     </g>
                                 </svg>
-                                <span class="text-sm font-bold 2xl:text-2xl">{{ $property->bedrooms }} Bedroom(s)</span>
+                                <span class="text-lg font-bold 2xl:text-2xl">{{ $property->bedrooms }} Bedroom(s)</span>
                             </div>
                             <div class="flex items-center gap-3 text-black/80">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-8">
                                     <path fill="currentColor"
                                         d="M3.5 4.135a1.635 1.635 0 0 1 3.153-.607l.144.358a4.1 4.1 0 0 0-1.38 1.774a4.18 4.18 0 0 0-.02 3.107a.75.75 0 0 0 .995.413l5.96-2.566a.75.75 0 0 0 .402-.963a3.97 3.97 0 0 0-2.132-2.213a3.84 3.84 0 0 0-2.466-.192l-.11-.275A3.135 3.135 0 0 0 2 4.135V11h-.25a.75.75 0 0 0 0 1.5H2v.355c0 .375 0 .595.016.84c.142 2.237 1.35 4.302 3.102 5.652l-.039.068l-1 2a.75.75 0 0 0 1.342.67l.968-1.935a7.4 7.4 0 0 0 2.58.765c.245.025.394.03.648.04h.007c.74.028 1.464.045 2.126.045s1.386-.017 2.126-.045h.007c.254-.01.404-.015.648-.04a7.4 7.4 0 0 0 2.58-.765l.968 1.936a.75.75 0 0 0 1.342-.671l-1-2l-.038-.068c1.751-1.35 2.96-3.416 3.102-5.652c.015-.245.015-.465.015-.84v-.038c0-.06 0-.123-.004-.18a2 2 0 0 0-.014-.137h.268a.75.75 0 0 0 0-1.5H3.5z" />
                                 </svg>
-                                <span class="text-sm font-bold 2xl:text-2xl">{{ $property->bathrooms }} Bathroom(s)</span>
+                                <span class="text-lg font-bold 2xl:text-2xl">{{ $property->bathrooms }} Bathroom(s)</span>
                             </div>
                             <div class="flex items-center gap-3 text-black/80">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-9">
@@ -106,7 +117,7 @@
                                         stroke-linejoin="round" stroke-width="1.5"
                                         d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
                                 </svg>
-                                <span class="text-sm font-bold 2xl:text-2xl">{{ $property->area }}
+                                <span class="text-lg font-bold 2xl:text-2xl">{{ $property->area }}
                                     sqm</span>
                             </div>
                         </div>
@@ -132,7 +143,7 @@
                     <div
                         class="relative bg-gradient-to-r from-[#21282e] to-[#907c4d] flex flex-col gap-5 p-5 rounded-2xl overflow-hidden">
                         <div
-                            class=" w-fit px-4 py-2 text-sm text-black rounded-lg 2xl:text-base {{ $property->status === 'For Sale'
+                            class=" w-fit px-4 py-2 text-lg text-black rounded-lg 2xl:text-base {{ $property->status === 'For Sale'
                                 ? 'bg-[#9dff00]'
                                 : ($property->status === 'For Rent'
                                     ? 'bg-[#00e0ff]'
@@ -163,7 +174,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="bg-[#f3f3f3] rounded-lg text-center text-[#656565] p-3 flex flex-col gap-2">
+                            <div
+                                class="bg-[#f3f3f3] rounded-lg text-center text-[#656565] mt-5 lg:mt-0  w-full lg:w-fit p-3 flex flex-col gap-2">
                                 <div class="text-2xl font-bold">
                                     18
                                 </div>
@@ -207,7 +219,7 @@
                                         class="w-full  h-[20rem] object-cover transition duration-500 group-hover:scale-105">
                                 </div>
                                 <div
-                                    class="absolute top-3 left-3 px-4 py-2 text-sm text-black rounded-lg 2xl:text-base {{ $item->status === 'For Sale'
+                                    class="absolute top-3 left-3 px-4 py-2 text-lg text-black rounded-lg 2xl:text-base {{ $item->status === 'For Sale'
                                         ? 'bg-[#9dff00]'
                                         : ($item->status === 'For Rent'
                                             ? 'bg-[#00e0ff]'
@@ -217,7 +229,7 @@
                             </div>
 
                             <div class="flex justify-between">
-                                <div class="px-4 py-2 text-sm text-[#20272D] bg-[#e6e6e6] rounded-full 2xl:text-lg">
+                                <div class="px-4 py-2 text-lg text-[#20272D] bg-[#e6e6e6] rounded-full 2xl:text-lg">
                                     {{ $item->type }}
                                 </div>
                                 <div class="flex items-center gap-5 text-[#656565]">
@@ -230,7 +242,7 @@
                                                 <path d="M7 8a2 2 0 1 1-1.995 2.15L5 10l.005-.15A2 2 0 0 1 7 8" />
                                             </g>
                                         </svg>
-                                        <span class="text-sm font-bold 2xl:text-xl">{{ $item->bedrooms }}</span>
+                                        <span class="text-lg font-bold 2xl:text-xl">{{ $item->bedrooms }}</span>
                                     </div>
 
                                     <div class="flex items-center gap-2">
@@ -238,7 +250,7 @@
                                             <path fill="currentColor"
                                                 d="M3.5 4.135a1.635 1.635 0 0 1 3.153-.607l.144.358a4.1 4.1 0 0 0-1.38 1.774a4.18 4.18 0 0 0-.02 3.107a.75.75 0 0 0 .995.413l5.96-2.566a.75.75 0 0 0 .402-.963a3.97 3.97 0 0 0-2.132-2.213a3.84 3.84 0 0 0-2.466-.192l-.11-.275A3.135 3.135 0 0 0 2 4.135V11h-.25a.75.75 0 0 0 0 1.5H2v.355c0 .375 0 .595.016.84c.142 2.237 1.35 4.302 3.102 5.652l-.039.068l-1 2a.75.75 0 0 0 1.342.67l.968-1.935a7.4 7.4 0 0 0 2.58.765c.245.025.394.03.648.04h.007c.74.028 1.464.045 2.126.045s1.386-.017 2.126-.045h.007c.254-.01.404-.015.648-.04a7.4 7.4 0 0 0 2.58-.765l.968 1.936a.75.75 0 0 0 1.342-.671l-1-2l-.038-.068c1.751-1.35 2.96-3.416 3.102-5.652c.015-.245.015-.465.015-.84v-.038c0-.06 0-.123-.004-.18a2 2 0 0 0-.014-.137h.268a.75.75 0 0 0 0-1.5H3.5z" />
                                         </svg>
-                                        <span class="text-sm font-bold 2xl:text-xl">{{ $item->bathrooms }}</span>
+                                        <span class="text-lg font-bold 2xl:text-xl">{{ $item->bathrooms }}</span>
                                     </div>
 
                                     <div class="flex items-center gap-2">
@@ -248,7 +260,7 @@
                                                 stroke-linejoin="round" stroke-width="1.5"
                                                 d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
                                         </svg>
-                                        <span class="text-sm font-bold 2xl:text-xl">{{ $item->area }}
+                                        <span class="text-lg font-bold 2xl:text-xl">{{ $item->area }}
                                             sqm</span>
                                     </div>
                                 </div>

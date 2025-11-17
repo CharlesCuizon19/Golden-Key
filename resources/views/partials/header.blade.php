@@ -1,7 +1,7 @@
-<div class="fixed z-40 w-full 2xl:absolute">
+<div class="fixed z-20 w-full xl:absolute">
     <div class="relative flex flex-col drop-shadow-md">
         <div class="bg-[#ecc467] py-2 w-full lg:flex items-end justify-end hidden">
-            <div class="2xl:mr-[7rem] flex items-end justify-end gap-10 ">
+            <div class="xl:mr-[1rem] 2xl:mr-[7rem] flex items-end justify-end gap-10 ">
                 <div class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -43,7 +43,7 @@
                 <img src="{{ asset('images/logo.png') }}" alt="" class="flex size-14 2xl:size-10 lg:hidden">
 
                 <!-- Desktop Nav -->
-                <ul class="items-center hidden space-x-12 text-lg text-gray-700 md:flex">
+                <ul class="items-center hidden space-x-12 text-lg text-gray-700 lg:flex">
                     <li class="relative z-[9999]">
                         <a href="{{ route('home') }}"
                             class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
@@ -67,7 +67,7 @@
                 </ul>
 
                 <!-- Desktop Actions -->
-                <div class="items-center hidden space-x-4 md:flex">
+                <div class="items-center hidden space-x-4 lg:flex">
                     <x-direct-inquiry-modal />
 
                     <button class="text-gray-700 hover:text-[#f37021] transition">
@@ -80,7 +80,7 @@
                 </div>
 
                 <!-- Mobile Hamburger -->
-                <button @click="open = !open" class="md:hidden text-gray-700 hover:text-[#f37021] focus:outline-none">
+                <button @click="open = !open" class="lg:hidden text-gray-700 hover:text-[#f37021] focus:outline-none">
                     <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -96,7 +96,7 @@
 
             <!-- Mobile Menu -->
             <div x-show="open" x-transition
-                class="relative z-50 flex flex-col px-6 py-4 space-y-4 bg-white border-t border-gray-200 md:hidden">
+                class="relative z-50 flex flex-col px-6 py-4 space-y-4 bg-white border-t border-gray-200 lg:hidden">
                 <a href="{{ route('home') }}"
                     class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
                 <a href="{{ route('about-us') }}"
@@ -110,7 +110,7 @@
                 <a href="{{ route('contact-us') }}"
                     class="hover:text-[#f37021] {{ Route::is('contact-us') ? 'font-bold text-black' : 'font-normal' }}">Contact
                     Us</a>
-                <x-button buttonName="Inquire Now" route="home" />
+                <x-direct-inquiry-modal />
             </div>
         </header>
     </div>
@@ -118,7 +118,7 @@
 
 <!-- Sticky Header on Scroll -->
 <div x-data="{ show: false }" x-init="window.addEventListener('scroll', () => { show = window.scrollY > 50 })" x-show="show" x-transition.duration.300.opacity
-    class="fixed top-0 left-0 z-[9999] hidden w-full bg-white shadow-md 2xl:flex">
+    class="fixed top-0 left-0 z-[9999] hidden w-full bg-white shadow-md xl:flex">
     <div class="flex items-center justify-between w-full px-6 py-4 2xl:mr-[8rem]">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="flex size-16 2xl:ml-[8rem]">
         <div class="flex items-center gap-10">

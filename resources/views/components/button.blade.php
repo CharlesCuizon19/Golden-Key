@@ -7,7 +7,7 @@
 <a href="{{ route($route) }}">
     <div
         class="flex items-center gap-3 bg-[#edc45b] hover:bg-[#f4d16e] w-fit transition px-5 py-3 rounded-md cursor-pointer">
-        <div class="text-base 2xl:text-xl text-[#20272D]">
+        <div class="text-lg 2xl:text-xl text-[#20272D]">
             {{ $buttonName }}
         </div>
         <div>

@@ -15,7 +15,7 @@
                     <div class="text-2xl 2xl:text-7xl text-[#20272d] leading-tight font-serif">Discover the Passion Behind
                         Golden Key
                     </div>
-                    <div class="text-[#20272d]/80 text-base lg:text-2xl leading-snug">
+                    <div class="text-[#20272d]/80 text-lg lg:text-2xl leading-snug">
                         Our property management company provides comprehensive management services for residential and
                         commercial properties. We aim to deliver exceptional customer service, maximize property value, and
                         ensure stress-free ownership.
@@ -33,7 +33,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="text-sm lg:text-2xl text-[#20272d]">
+                            <div class="text-lg lg:text-2xl text-[#20272d]">
                                 Complete Property Management Solutions
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="text-sm lg:text-2xl text-[#20272d]">
+                            <div class="text-lg lg:text-2xl text-[#20272d]">
                                 Professional Building Maintenance
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="text-sm lg:text-2xl text-[#20272d]">
+                            <div class="text-lg lg:text-2xl text-[#20272d]">
                                 Tenant & Owner Portals
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="text-sm lg:text-2xl text-[#20272d]">
+                            <div class="text-lg lg:text-2xl text-[#20272d]">
                                 Marketing & Leasing Support
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             <div>
-                                <ul class="space-y-3 text-sm list-disc lg:text-xl">
+                                <ul class="space-y-3 text-lg list-disc lg:text-xl">
                                     <li>
                                         Provide exceptional customer service by understanding, anticipating, and gratifying
                                         clients' needs in a timely, cost-effective, and value-added manner.
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                             <div>
-                                <ul class="space-y-3 text-sm list-disc lg:text-xl">
+                                <ul class="space-y-3 text-lg list-disc lg:text-xl">
                                     <li>
                                         To be a distinguished leader in the real estate industry, known for innovation,
                                         professionalism, teamwork, integrity, and commitment.
@@ -178,7 +178,8 @@
                                 </div>
                             </div>
                             <div>
-                                <ul class="space-y-1 text-sm list-disc lg:text-xl">
+                                <ul
+                                    class="grid grid-cols-1 space-y-1 text-lg list-disc md:grid-cols-3 lg:grid-cols-1 lg:text-xl">
                                     <li>
                                         Integrity
                                     </li>
@@ -241,7 +242,7 @@
                     </template>
                 </div>
 
-                <div class="col-span-2 p-6 text-sm lg:text-2xl md:w-full">
+                <div class="col-span-2 p-6 text-lg lg:text-2xl md:w-full">
                     <!-- Target Market -->
                     <div x-show="activeTab === 'target'" x-transition class="space-y-5">
                         <x-title title="Target Market" />
@@ -327,7 +328,7 @@
                     <div class="text-2xl lg:text-6xl text-[#20272d] font-serif">
                         Property Management Services
                     </div>
-                    <div class="text-center text-[#20272d]/90 leading-normal text-base lg:text-2xl max-w-3xl">
+                    <div class="text-center text-[#20272d]/90 leading-normal text-lg lg:text-2xl max-w-3xl">
                         We handle every aspect of property care, including leasing, maintenance, marketing, and financial
                         reporting, to ensure smooth operations and a worry-free ownership experience for our clients.
                     </div>
@@ -340,7 +341,7 @@
                                     d="M20 13q.9 0 1.5.6c.3.4.5.9.5 1.4l-8 3l-7-2V7h1.9l7.3 2.7c.5.2.8.6.8 1.1c0 .3-.1.6-.3.8s-.6.4-.9.4H13l-1.8-.7l-.3.9l2.1.8zM1 7h4v11H1z" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Rent Collection and Accounting
                         </div>
                     </div>
@@ -351,7 +352,7 @@
                                     d="M12.835 3.161a.8.8 0 0 0 .147-.148h2.562l.035-.001a5 5 0 0 1 .545 0h.038a3.8 3.8 0 0 1 1.646.369a5.23 5.23 0 0 1 2.34 1.822a5.2 5.2 0 0 1 .804 4.348l-3.281-3.237a.75.75 0 0 0-.527-.216h-4.775a.75.75 0 0 0-.423.152l-1.884 1.428a.97.97 0 0 1-1.358-.184a.95.95 0 0 1 .181-1.34zM7.899 14.235l-.014.013l-.974.968l-.013.012a.906.906 0 0 1-1.261-.012a.89.89 0 0 1 0-1.267l.974-.968a.906.906 0 0 1 1.275 0a.89.89 0 0 1 .013 1.254m-.291 1.698a.89.89 0 0 0 .013 1.254c.352.35.923.35 1.275 0l.974-.968a.892.892 0 0 0-.14-1.38a.906.906 0 0 0-1.122.1l-.013.014l-.974.967zM5.5 11.407a.89.89 0 0 1 0 1.267l-.974.968a.906.906 0 0 1-1.275 0a.89.89 0 0 1 0-1.267l.974-.968a.906.906 0 0 1 1.275 0m6.353 5.517a.89.89 0 0 1 0 1.267l-.974.968a.906.906 0 0 1-1.275 0a.89.89 0 0 1-.172-1.028l.001-.002a.9.9 0 0 1 .171-.237l.974-.968a.906.906 0 0 1 1.275 0M5.344 4.83a6.18 6.18 0 0 1 5.112-1.749L7.98 4.958a2.45 2.45 0 0 0-.466 3.448a2.473 2.473 0 0 0 3.454.467l1.684-1.275h4.185l3.507 3.46l.036.04l1.15 1.15a1.439 1.439 0 0 1-1.936 2.124l-.096-.096l-.06-.052l-1.093-1.092a.5.5 0 1 0-.707.707l1.15 1.15q.063.062.128.119l.044.044a1.019 1.019 0 1 1-1.441 1.441l-.17-.169a.5.5 0 0 0-.853.363a.5.5 0 0 0 .147.365l.223.223a.943.943 0 1 1-1.333 1.333h-.001l-.012-.013l-.21-.21a.497.497 0 0 0-.707 0a.5.5 0 0 0 0 .707l.218.219a.96.96 0 0 1-1.35 1.367l-1.431-1.36l.525-.522a1.884 1.884 0 0 0 0-2.677a1.9 1.9 0 0 0-1.429-.552a1.88 1.88 0 0 0-.556-1.42a1.9 1.9 0 0 0-1.428-.552a1.88 1.88 0 0 0-.556-1.419a1.91 1.91 0 0 0-1.844-.489a1.88 1.88 0 0 0-.541-1.085a1.914 1.914 0 0 0-2.514-.158A6.1 6.1 0 0 1 5.344 4.83" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Tenant Screening and Leasing
                         </div>
                     </div>
@@ -362,7 +363,7 @@
                                     d="m86.257 23.405l-3.866 3.866l-3.737 3.737l-4.759 4.759a9.08 9.08 0 0 1-9.663-9.663l4.759-4.759l3.737-3.737l3.866-3.866a.645.645 0 0 0 0-.911c-.046-.046-.101-.074-.155-.103l.001-.001l-.01-.004a1 1 0 0 0-.102-.043a21.4 21.4 0 0 0-8.749-1.878c-11.939 0-21.618 9.679-21.618 21.618c0 2.28.358 4.475 1.012 6.538L24.428 61.504c-7.545.122-13.627 6.267-13.627 13.842c0 7.65 6.203 13.853 13.853 13.853c7.574 0 13.72-6.083 13.842-13.628l22.546-22.546a21.6 21.6 0 0 0 6.539 1.012c11.939 0 21.618-9.679 21.618-21.618c0-3.118-.686-6.066-1.877-8.742a.6.6 0 0 0-.05-.118l-.022-.052l-.007.007c-.024-.037-.041-.078-.074-.111a.646.646 0 0 0-.912.002M30.378 75.346a5.724 5.724 0 1 1-11.449 0a5.724 5.724 0 0 1 11.449 0" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Property Maintenance and Repairs
                         </div>
                     </div>
@@ -373,7 +374,7 @@
                                     d="m11.03 13.923l3.67-2.361q.316-.204.316-.562t-.316-.561l-3.67-2.362q-.326-.229-.678-.04q-.352.188-.352.596v4.734q0 .408.352.596q.352.189.679-.04M4.615 18q-.69 0-1.153-.462T3 16.384V5.616q0-.691.463-1.153T4.615 4h14.77q.69 0 1.152.463T21 5.616v10.769q0 .69-.463 1.153T19.385 18H15v1.192q0 .349-.23.578t-.578.23H9.808q-.348 0-.578-.23T9 19.192V18zm0-1h14.77q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T19.385 5H4.615q-.23 0-.423.192T4 5.616v10.769q0 .23.192.423t.423.192M4 17V5z" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Marketing and Advertising
                         </div>
                     </div>
@@ -383,7 +384,7 @@
                                 <path fill="currentColor" d="M12 3L2 12h3v8h14v-8h3M9 18H7v-6h2m4 6h-2v-8h2m4 8h-2v-4h2" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Financial Reporting and Budgeting
                         </div>
                     </div>
@@ -395,7 +396,7 @@
                                     d="M7 20h10M6 6l6-1l6 1m-6-3v17m-3-8L6 6l-3 6a3 3 0 0 0 6 0m12 0l-3-6l-3 6a3 3 0 0 0 6 0" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Compliance with Laws and Regulations
                         </div>
                     </div>
@@ -406,7 +407,7 @@
                                     d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906M16.539 25.398c0-4.945 4.055-9 9.023-9c4.946 0 9 4.055 9 9a8.76 8.76 0 0 1-1.664 5.18l5.86 5.86c.328.328.539.773.539 1.218c0 .985-.68 1.664-1.594 1.664c-.539 0-.984-.164-1.43-.61l-5.789-5.788a8.9 8.9 0 0 1-4.922 1.5c-4.968 0-9.023-4.055-9.023-9.024m2.601 0c0 3.516 2.907 6.422 6.422 6.422c3.47 0 6.375-2.906 6.375-6.422c0-3.468-2.906-6.375-6.375-6.375c-3.515 0-6.422 2.907-6.422 6.375" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Regular Property Inspections
                         </div>
                     </div>
@@ -417,7 +418,7 @@
                                     d="M7.378 2.283A3.5 3.5 0 0 0 2.536 5c.26.02.464.24.464.499v3c0 .28-.225.5-.503.5H1.5A1.5 1.5 0 0 1 0 7.5v-1A1.5 1.5 0 0 1 1.5 5h.028a4.5 4.5 0 0 1 8.944 0h.028A1.5 1.5 0 0 1 12 6.5v1a1.5 1.5 0 0 1-1.394 1.496c-.091.64-.339 1.14-.685 1.52a2.93 2.93 0 0 1-1.283.796a4 4 0 0 1-.758.164a1 1 0 1 1-.031-1.005a3 3 0 0 0 .483-.111c.321-.104.622-.267.85-.519A1.7 1.7 0 0 0 9.592 9h-.09A.504.504 0 0 1 9 8.5v-3c0-.268.205-.48.464-.499a3.5 3.5 0 0 0-2.086-2.718M10 6v2h.5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM2 8V6h-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5z" />
                             </svg>
                         </div>
-                        <div class="font-serif text-base lg:text-3xl text-center w-[80%]">
+                        <div class="font-serif text-lg lg:text-3xl text-center w-[80%]">
                             Tenant Communication and Support
                         </div>
                     </div>
