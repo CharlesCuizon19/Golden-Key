@@ -43,4 +43,9 @@ class Unit extends Model
             ->withPivot('quantity')
             ->withTimestamps();
     }
+
+    public function inquiries()
+    {
+        return $this->hasMany(UnitInquiry::class);
+    }
 }

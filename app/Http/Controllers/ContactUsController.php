@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,74 +9,58 @@ use Illuminate\Support\Facades\Log;
 class ContactUsController extends Controller
 {
     /**
-     * Display a listing of the contact messages.
+     * Display all contact messages.
      */
     public function index()
     {
-        Log::info('Fetching contact messages list');
-
-        $contacts = ContactUs::latest()->paginate(10);
-
+        $contacts = ContactUs::orderBy('created_at', 'desc')->get();
         return view('admin.contact-us.index', compact('contacts'));
     }
 
     /**
-     * Show a single contact message.
+     * Store a new contact message (public form).
      */
-    public function show(ContactUs $contact)
+    public function store(Request $request)
     {
-        Log::info('Showing contact message', ['id' => $contact->id]);
+        logger()->info('Contact Form Submitted', $request->all());
 
-        return view('admin.contact-us.show', compact('contact'));
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email'     => 'required|email|max:255',
+            'subject'   => 'required|string|max:255',
+            'message'   => 'required|string|max:1000',
+        ]);
+
+        $contact = ContactUs::create($validated);
+
+        logger()->info('Contact Saved', ['id' => $contact->id]);
+
+        return response()->json(['success' => true, 'message' => 'Message submitted successfully']);
     }
+
 
     /**
      * Delete a contact message.
      */
-    public function destroy(ContactUs $contact)
+    public function destroy(Request $request, ContactUs $contact_u)
     {
-        Log::info('Attempting to delete contact message', ['id' => $contact->id]);
+        // Log before deletion
+        logger()->info('Deleting contact message', [
+            'id' => $contact_u->id,
+            'full_name' => $contact_u->full_name,
+            'email' => $contact_u->email,
+        ]);
 
-        try {
-            $contact->delete();
+        $contact_u->delete();
 
-            Log::info('Contact message deleted successfully', ['id' => $contact->id]);
+        // Log after deletion
+        logger()->info('Contact message deleted successfully', [
+            'id' => $contact_u->id
+        ]);
 
-            return redirect()
-                ->route('admin.contact-us.index')
-                ->with('success', 'Contact message deleted successfully.');
-        } catch (\Exception $e) {
-            Log::error('Error deleting contact message', [
-                'id' => $contact->id,
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-
-            return redirect()
-                ->route('admin.contact-us.index')
-                ->with('error', 'Something went wrong while deleting the contact message.');
-        }
-    }
-
-    /**
-     * Optional: Export to Excel (requires Maatwebsite Excel package)
-     */
-    public function export()
-    {
-        Log::info('Exporting contact messages to Excel');
-
-        try {
-            // Example using Laravel Excel
-            // return Excel::download(new ContactUsExport, 'contact_messages.xlsx');
-        } catch (\Exception $e) {
-            Log::error('Failed to export contact messages', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-
-            return redirect()
-                ->route('admin.contact-us.index')
-                ->with('error', 'Failed to export contact messages.');
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Contact message deleted successfully'
+        ]);
     }
 }

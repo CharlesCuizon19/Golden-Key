@@ -21,17 +21,20 @@
                 inbox.
             </div>
             <div class="flex justify-center bg-transparent h-fit">
-                <form action="#" method="POST"
-                    class="flex items-center justify-between w-full p-2 overflow-hidden bg-white border border-yellow-400 shadow-md rounded-xl">
+                <form action="{{ route('newsletter.store') }}" method="POST"
+                    class="flex items-center justify-between w-full p-2 overflow-hidden bg-white border border-yellow-400 shadow-md rounded-xl"
+                    id="newsletter-form">
                     @csrf
                     <input type="email" name="email" placeholder="Enter your email address"
                         class="flex-grow lg:px-6 px-3 py-2 lg:py-4 text-base lg:text-xl 2xl:w-[30rem] text-gray-700 placeholder-gray-400 focus:outline-none"
                         required>
+
                     <button type="submit"
                         class="lg:px-7 py-2 px-4 lg:py-4 text-base lg:text-xl rounded-md text-gray-900 transition-all duration-300 bg-[#ecc467] hover:bg-[#b99a50] focus:outline-none">
                         Subscribe Now
                     </button>
                 </form>
+
             </div>
 
         </div>
@@ -220,3 +223,41 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // prevent default form submission
+
+        const form = this;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json' // ensures Laravel treats this as AJAX
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Subscribed!',
+                    text: data.message || 'You have successfully subscribed to our newsletter.',
+                    confirmButtonColor: '#ecc467'
+                });
+                form.reset(); // reset form after successful submission
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! Please try again.',
+                    confirmButtonColor: '#ecc467'
+                });
+                console.error(error);
+            });
+    });
+</script>

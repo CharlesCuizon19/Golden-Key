@@ -1,36 +1,38 @@
 @extends('layouts.admin')
 
-@section('title', 'INQUIRIES')
+@section('title', 'Unit Inquiries')
 
 @section('content')
 @php use Illuminate\Support\Str; @endphp
 
 <!-- Page Title -->
-<h1 class="text-2xl font-semibold mb-6 text-[#ecc467]">INQUIRIES</h1>
+<h1 class="text-2xl font-semibold mb-6 text-[#ecc467]">UNIT INQUIRIES</h1>
 
-<!-- Product Inquiries Table -->
-<div class="overflow-x-auto bg-[#1a1a1a] border border-[#2c2c2c] rounded-lg shadow">
+<!-- Unit Inquiries Table -->
+<div class="overflow-x-auto bg-white border rounded-lg shadow">
     <table class="table-fixed w-full border-collapse text-center" id="inquiries-table">
         <thead>
-            <tr class="bg-[#121212] text-[#ecc467] text-sm font-semibold">
-                <th class="px-6 py-3 rounded-tl-lg w-16">ID</th>
-                <th class="px-6 py-3 w-1/5">Full Name</th>
-                <th class="px-6 py-3 w-1/5">Email</th>
-                <th class="px-6 py-3 w-1/5">Phone</th>
-                <th class="px-6 py-3 w-1/5">Interested In</th>
-                <th class="px-6 py-3 w-1/5">Message</th>
-                <th class="px-6 py-3 rounded-tr-lg w-40">Actions</th>
+            <tr class="bg-black text-white text-sm font-semibold">
+                <th class="px-10 py-3 rounded-tl-lg w-16">ID</th>
+                <th class="px-10 py-3 w-1/5">Unit</th>
+                <th class="px-10 py-3 w-1/5">Full Name</th>
+                <th class="px-10 py-3 w-1/5">Email</th>
+                <th class="px-10 py-3 w-1/5">Phone</th>
+                <th class="px-10 py-3 w-1/5">Message</th>
+                <th class="px-10 py-3 rounded-tr-lg w-40">Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse($inquiries as $inquiry)
-            <tr class="border-t border-[#2c2c2c] hover:bg-[#2c2c2c] transition">
-                <td class="px-6 py-3 text-center">{{ $inquiry->id }}</td>
-                <td class="px-6 py-3">{{ $inquiry->full_name }}</td>
-                <td class="px-6 py-3">{{ $inquiry->email }}</td>
-                <td class="px-6 py-3">{{ $inquiry->phone ?? '—' }}</td>
-                <td class="px-6 py-3 text-center">{{ Str::limit(strip_tags($inquiry->interested_in), 80) }}</td>
-                <td class="px-6 py-3 text-center">{{ Str::limit(strip_tags($inquiry->message), 80) }}</td>
+            <tr class="border-t hover:bg-gray-50 transition">
+                <td class="px-10 py-3 text-center">{{ $inquiry->id }}</td>
+                <td class="px-10 py-3">
+                    {{ $inquiry->unit ? $inquiry->unit->title : 'N/A' }}
+                </td>
+                <td class="px-10 py-3">{{ $inquiry->full_name }}</td>
+                <td class="px-10 py-3">{{ $inquiry->email }}</td>
+                <td class="px-10 py-3">{{ $inquiry->phone ?? '—' }}</td>
+                <td class="px-10 py-3 text-center">{{ Str::limit(strip_tags($inquiry->message), 80) }}</td>
                 <td class="px-6 py-3 whitespace-nowrap">
                     <div class="flex justify-center items-center gap-2">
                         <button type="button"
@@ -43,7 +45,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="text-center py-6 text-gray-400">No inquiries found.</td>
+                <td colspan="7" class="text-center py-6 text-gray-500">No unit inquiries found.</td>
             </tr>
             @endforelse
         </tbody>
@@ -74,6 +76,7 @@
         });
     });
 
+    // SweetAlert Delete
     function confirmDelete(inquiryId) {
         Swal.fire({
             title: 'Are you sure?',
@@ -88,7 +91,7 @@
             if (result.isConfirmed) {
                 let form = document.createElement('form');
                 form.method = 'POST';
-                form.action = "/admin/inquiries/" + inquiryId;
+                form.action = "/admin/unit-inquiries/" + inquiryId;
 
                 let csrf = document.createElement('input');
                 csrf.type = 'hidden';
@@ -108,6 +111,7 @@
         });
     }
 
+    // SweetAlert Success message
     @if(session('success'))
     Swal.fire({
         icon: 'success',

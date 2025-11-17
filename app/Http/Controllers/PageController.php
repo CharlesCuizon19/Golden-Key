@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
+use App\Models\UnitType;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -16,8 +18,55 @@ class PageController extends Controller
     }
     public function unit_listing()
     {
-        return view('pages.unit-listing');
+        // Fetch all units with relations
+        $units = Unit::with(['agent', 'type', 'features', 'images'])->get();
+
+        // Transform units for the front-end
+        $unitsData = $units->map(function ($unit) {
+            return (object)[
+                'id' => $unit->id,
+                'name' => $unit->title,
+                'type' => $unit->type?->name ?? 'N/A',
+                'status' => ucfirst(str_replace('_', ' ', $unit->status)),
+                'location' => $unit->location_text,
+                'area' => $unit->sqm,
+                'price' => number_format($unit->price),
+                'price_type' => $unit->price_status === 'fixed' ? 'fixed' : 'month',
+                'image' => $unit->images->first()?->image_path ?? 'images/default-property.png',
+                // Include features in the mapped object
+                'features' => $unit->features->map(function ($feature) {
+                    return (object)[
+                        'name' => $feature->feature_name,
+                        'quantity' => $feature->pivot->quantity ?? null,
+                    ];
+                }),
+            ];
+        });
+
+        // Chunk for Swiper (9 per slide)
+        $chunks = $unitsData->chunk(9);
+
+        // Dynamic filters
+        $types = UnitType::pluck('name')->toArray();
+        $statuses = ['For Sale', 'For Rent', 'For Lease'];
+        $cities = Unit::pluck('location_text')->unique()->toArray();
+        $priceRanges = ['₱0 - ₱1M', '₱1M - ₱5M', '₱5M+'];
+        $areaRanges = ['0 - 50 sqm', '50 - 100 sqm', '100+ sqm'];
+        $sortOptions = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
+
+        return view('pages.unit-listing', compact(
+            'chunks',
+            'types',
+            'statuses',
+            'cities',
+            'priceRanges',
+            'areaRanges',
+            'sortOptions'
+        ));
     }
+
+
+
     public function FAQs()
     {
         return view('pages.FAQs');
@@ -28,472 +77,22 @@ class PageController extends Controller
     }
     public function unit_listing_singlepage($id)
     {
-        $properties = [
-            (object) [
-                'id' => 1,
-                'name' => 'The Grand Vista Residences',
-                'type' => 'Condominium',
-                'status' => 'For Sale',
-                'location' => 'Bonifacio Global City, Taguig',
-                'bedrooms' => 2,
-                'bathrooms' => 2,
-                'area' => 82,
-                'price' => '9,800,000',
-                'price_type' => 'fixed',
-                'image' => 'images/grand-vista.png',
-                'image_gallery' => [
-                    'images/property-img1.png',
-                    'images/property-img2.png',
-                    'images/property-img3.png',
-                    'images/property-img4.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 2,
-                'name' => 'One Meridian Business Tower',
-                'type' => 'Office Space',
-                'status' => 'For Lease',
-                'location' => 'Ortigas Center, Pasig City',
-                'bedrooms' => 0,
-                'bathrooms' => 2,
-                'area' => 130,
-                'price' => '115,000',
-                'price_type' => 'month',
-                'image' => 'images/meridian-tower.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 3,
-                'name' => 'Verdant Hills Estate',
-                'type' => 'House & Lot',
-                'status' => 'For Rent',
-                'location' => 'Nuvali, Sta. Rosa, Laguna',
-                'bedrooms' => 4,
-                'bathrooms' => 3,
-                'area' => 210,
-                'price' => '80,000',
-                'price_type' => 'month',
-                'image' => 'images/verdant-hills.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 4,
-                'name' => 'Azure Beach Villas',
-                'type' => 'Resort Villa',
-                'status' => 'For Sale',
-                'location' => 'Nasugbu, Batangas',
-                'bedrooms' => 3,
-                'bathrooms' => 3,
-                'area' => 180,
-                'price' => '15,200,000',
-                'price_type' => 'fixed',
-                'image' => 'images/azure-beach.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 5,
-                'name' => 'Skyline Residences',
-                'type' => 'Condominium',
-                'status' => 'For Sale',
-                'location' => 'Makati Central Business District',
-                'bedrooms' => 1,
-                'bathrooms' => 1,
-                'area' => 55,
-                'price' => '6,400,000',
-                'price_type' => 'fixed',
-                'image' => 'images/skyline-residences.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 6,
-                'name' => 'Harbor Point Lofts',
-                'type' => 'Apartment',
-                'status' => 'For Rent',
-                'location' => 'Subic Bay Freeport Zone',
-                'bedrooms' => 2,
-                'bathrooms' => 2,
-                'area' => 95,
-                'price' => '45,000',
-                'price_type' => 'month',
-                'image' => 'images/harbor-point.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 7,
-                'name' => 'Lakeside Eco Homes',
-                'type' => 'Townhouse',
-                'status' => 'For Sale',
-                'location' => 'Tagaytay City',
-                'bedrooms' => 3,
-                'bathrooms' => 2,
-                'area' => 140,
-                'price' => '7,900,000',
-                'price_type' => 'fixed',
-                'image' => 'images/lakeside-eco.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 8,
-                'name' => 'The Horizon Suites',
-                'type' => 'Condominium',
-                'status' => 'For Lease',
-                'location' => 'Cebu IT Park, Cebu City',
-                'bedrooms' => 1,
-                'bathrooms' => 1,
-                'area' => 48,
-                'price' => '35,000',
-                'price_type' => 'month',
-                'image' => 'images/horizon-suites.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 9,
-                'name' => 'Sierra Valley Residences',
-                'type' => 'Condominium',
-                'status' => 'For Sale',
-                'location' => 'Cainta, Rizal',
-                'bedrooms' => 2,
-                'bathrooms' => 2,
-                'area' => 70,
-                'price' => '5,800,000',
-                'price_type' => 'fixed',
-                'image' => 'images/sierra-valley.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 10,
-                'name' => 'Palm Grove Village',
-                'type' => 'House & Lot',
-                'status' => 'For Rent',
-                'location' => 'Las Piñas City',
-                'bedrooms' => 3,
-                'bathrooms' => 3,
-                'area' => 160,
-                'price' => '55,000',
-                'price_type' => 'month',
-                'image' => 'images/palm-grove.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 11,
-                'name' => 'Greenbelt Executive Suites',
-                'type' => 'Condominium',
-                'status' => 'For Lease',
-                'location' => 'Legazpi Village, Makati City',
-                'bedrooms' => 1,
-                'bathrooms' => 1,
-                'area' => 50,
-                'price' => '40,000',
-                'price_type' => 'month',
-                'image' => 'images/greenbelt-suites.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 12,
-                'name' => 'Northgate Business Plaza',
-                'type' => 'Office Space',
-                'status' => 'For Lease',
-                'location' => 'Alabang, Muntinlupa City',
-                'bedrooms' => 0,
-                'bathrooms' => 4,
-                'area' => 250,
-                'price' => '180,000',
-                'price_type' => 'month',
-                'image' => 'images/northgate-plaza.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 13,
-                'name' => 'Manila Bay Residences',
-                'type' => 'Condominium',
-                'status' => 'For Sale',
-                'location' => 'Roxas Boulevard, Manila',
-                'bedrooms' => 2,
-                'bathrooms' => 2,
-                'area' => 85,
-                'price' => '9,200,000',
-                'price_type' => 'fixed',
-                'image' => 'images/manila-bay.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 14,
-                'name' => 'Bamboo Grove Townhomes',
-                'type' => 'Townhouse',
-                'status' => 'For Sale',
-                'location' => 'Marikina City',
-                'bedrooms' => 3,
-                'bathrooms' => 3,
-                'area' => 120,
-                'price' => '6,900,000',
-                'price_type' => 'fixed',
-                'image' => 'images/bamboo-grove.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 15,
-                'name' => 'The Ridgeview Residences',
-                'type' => 'House & Lot',
-                'status' => 'For Sale',
-                'location' => 'Cavite City',
-                'bedrooms' => 4,
-                'bathrooms' => 3,
-                'area' => 190,
-                'price' => '8,500,000',
-                'price_type' => 'fixed',
-                'image' => 'images/ridgeview.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 16,
-                'name' => 'Sunset View Villas',
-                'type' => 'Resort Villa',
-                'status' => 'For Rent',
-                'location' => 'Panglao, Bohol',
-                'bedrooms' => 3,
-                'bathrooms' => 2,
-                'area' => 175,
-                'price' => '95,000',
-                'price_type' => 'month',
-                'image' => 'images/sunset-villas.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 17,
-                'name' => 'The Parklane Residences',
-                'type' => 'Condominium',
-                'status' => 'For Lease',
-                'location' => 'Quezon City',
-                'bedrooms' => 1,
-                'bathrooms' => 1,
-                'area' => 42,
-                'price' => '25,000',
-                'price_type' => 'month',
-                'image' => 'images/parklane.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 18,
-                'name' => 'Riverbend Heights',
-                'type' => 'Townhouse',
-                'status' => 'For Sale',
-                'location' => 'Antipolo City',
-                'bedrooms' => 3,
-                'bathrooms' => 3,
-                'area' => 130,
-                'price' => '7,200,000',
-                'price_type' => 'fixed',
-                'image' => 'images/riverbend-heights.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 19,
-                'name' => 'Blue Horizon Condominiums',
-                'type' => 'Condominium',
-                'status' => 'For Sale',
-                'location' => 'Davao City',
-                'bedrooms' => 2,
-                'bathrooms' => 2,
-                'area' => 75,
-                'price' => '5,900,000',
-                'price_type' => 'fixed',
-                'image' => 'images/blue-horizon.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-            (object) [
-                'id' => 20,
-                'name' => 'Summit Green Estates',
-                'type' => 'House & Lot',
-                'status' => 'For Sale',
-                'location' => 'San Fernando, Pampanga',
-                'bedrooms' => 5,
-                'bathrooms' => 4,
-                'area' => 250,
-                'price' => '12,300,000',
-                'price_type' => 'fixed',
-                'image' => 'images/summit-green.png',
-                'image_gallery' => [
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                    'images/grand-vista.png',
-                ],
-                'property_desc' => 'Experience elevated city living at The Grand Vista Residences, a premier condominium development located in the heart of Bonifacio Global City, Taguig. Designed for modern professionals and families, this residence combines contemporary architecture, luxurious interiors, and urban convenience to create a lifestyle that\'s both sophisticated and comfortable.',
-            ],
-        ];
+        $property = Unit::with([
+            'images',
+            'agent' => function ($q) {
+                $q->withCount('units'); // << load units_count
+            },
+            'type',
+            'features'
+        ])->findOrFail($id);
 
-        $property = $properties[array_search($id, array_column($properties, 'id'))];
+        $imageGallery_count = $property->images->count();
 
-        $imageGallery_count = count($property->image_gallery);
-
-        $latestProperties = collect($properties)->where('id', '!=', $id)->take(3);
+        $latestProperties = Unit::with('images')
+            ->where('id', '!=', $id)
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('pages.unit-listing-singlepage', compact('property', 'imageGallery_count', 'latestProperties'));
     }

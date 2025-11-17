@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\ContactUsController as ControllersContactUsController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UnitFeatureController;
+use App\Http\Controllers\UnitInquiryController;
 use App\Http\Controllers\UnitTypeController;
 use App\Models\ContactUs;
 
@@ -41,13 +42,22 @@ Route::get('/FAQs', [PageController::class, 'FAQs'])->name('FAQs');
 
 Route::get('/contact-us', [PageController::class, 'contact_us'])->name('contact-us');
 
+// Public route for submitting inquiries
+Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+Route::post('/inquiries', [InquiryController::class, 'store'])->name('inquiries.store');
+Route::post('/unit-inquiries', [UnitInquiryController::class, 'store'])->name('unit_inquiries.store');
+Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contacts.store');
+
+
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('banners', BannerController::class);
     Route::resource('inquiries', InquiryController::class);
-    Route::resource('contact-us', ControllersContactUsController::class);
+    Route::resource('contact-us', ContactUsController::class);
     Route::resource('unit-type', UnitTypeController::class);
     Route::resource('units', UnitController::class);
-     Route::resource('unit-feature', UnitFeatureController::class);
+    Route::resource('unit-feature', UnitFeatureController::class);
     Route::resource('agents', AgentController::class);
+    Route::resource('unit-inquiries', UnitInquiryController::class);
+    Route::resource('newsletters', NewsletterController::class);
 });

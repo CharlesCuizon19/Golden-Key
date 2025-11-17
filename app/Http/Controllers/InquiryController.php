@@ -30,34 +30,42 @@ class InquiryController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('Inquiry store method called', ['request_data' => $request->all()]);
-
         try {
             $validated = $request->validate([
-                'full_name'   => 'required|string|max:255',
-                'email'       => 'required|email|max:255',
-                'phone'       => 'required|string|max:20',
+                'full_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|string|max:20',
                 'interested_in' => 'nullable|string|max:255',
-                'message'     => 'nullable|string|max:2000',
+                'message' => 'nullable|string|max:2000',
             ]);
 
             Inquiry::create($validated);
 
-            Log::info('Inquiry created successfully', ['inquiry' => $validated]);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Your inquiry has been submitted successfully!'
+                ]);
+            }
 
-            return redirect()
-                ->route('admin.inquiries.index')
-                ->with('success', 'Inquiry submitted successfully.');
+            return redirect()->back()->with('success', 'Inquiry submitted successfully!');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            Log::warning('Validation failed', ['errors' => $e->errors()]);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $e->errors()
+                ], 422);
+            }
             throw $e;
         } catch (\Exception $e) {
-            Log::error('Error storing inquiry', [
-                'message' => $e->getMessage(),
-                'trace'   => $e->getTraceAsString(),
-            ]);
-
-            return back()->with('error', 'Something went wrong. Please check logs.');
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Something went wrong. Please try again.'
+                ], 500);
+            }
+            throw $e;
         }
     }
 

@@ -190,6 +190,36 @@
                             <span x-show="sidebarOpen" x-transition class="ml-3">Contact Us</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('admin.unit-inquiries.index') }}"
+                            class="flex items-center px-3 py-2 rounded-lg transition
+                                {{ request()->routeIs('admin.unit-inquiries.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
+                            :class="{ 'justify-center': !sidebarOpen, 'justify-start': sidebarOpen }">
+
+                            <!-- Inbox/List Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h18" />
+                            </svg>
+
+                            <span x-show="sidebarOpen" x-transition.opacity class="ml-3 select-none">Unit Inquiries</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.newsletters.index') }}"
+                            class="flex items-center px-3 py-2 rounded-lg transition
+                                {{ request()->routeIs('admin.newsletters.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
+                            :class="{ 'justify-center': !sidebarOpen, 'justify-start': sidebarOpen }">
+
+                            <!-- Inbox/List Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h18" />
+                            </svg>
+
+                            <span x-show="sidebarOpen" x-transition.opacity class="ml-3 select-none">Newsletters</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

@@ -25,10 +25,10 @@
             @forelse($contacts as $contact)
             <tr class="border-t border-[#2c2c2c] hover:bg-[#2c2c2c] transition">
                 <td class="px-6 py-3 text-center">{{ $contact->id }}</td>
-                <td class="px-6 py-3 text-left">{{ $contact->full_name ?? '—' }}</td>
+                <td class="px-6 py-3 text-center">{{ $contact->full_name ?? '—' }}</td>
                 <td class="px-6 py-3">{{ $contact->email ?? '—' }}</td>
                 <td class="px-6 py-3">{{ $contact->subject ?? '—' }}</td>
-                <td class="px-6 py-3 text-left">{{ Str::limit(strip_tags($contact->message), 80) }}</td>
+                <td class="px-6 py-3 text-center">{{ Str::limit(strip_tags($contact->message), 80) }}</td>
                 <td class="px-6 py-3 whitespace-nowrap">
                     <div class="flex justify-center items-center gap-2">
                         <button type="button"
@@ -72,8 +72,8 @@
         });
     });
 
-    function confirmDelete(contactId) {
-        Swal.fire({
+    async function confirmDelete(contactId) {
+        const result = await Swal.fire({
             title: 'Are you sure?',
             text: "Delete this message? This action cannot be undone.",
             icon: 'warning',
@@ -82,28 +82,52 @@
             cancelButtonColor: '#6B7280',
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                let form = document.createElement('form');
-                form.method = 'POST';
-                form.action = "/admin/contact_us/" + contactId;
-
-                let csrf = document.createElement('input');
-                csrf.type = 'hidden';
-                csrf.name = '_token';
-                csrf.value = "{{ csrf_token() }}";
-
-                let method = document.createElement('input');
-                method.type = 'hidden';
-                method.name = '_method';
-                method.value = 'DELETE';
-
-                form.appendChild(csrf);
-                form.appendChild(method);
-                document.body.appendChild(form);
-                form.submit();
-            }
         });
+
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch('{{ route("admin.contact-us.destroy", "") }}/' + contactId, {
+                    method: 'DELETE',
+
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // Remove row from DataTable
+                    const table = $('#contacts-table').DataTable();
+                    table
+                        .row($(`button[onclick="confirmDelete(${contactId})"]`).parents('tr'))
+                        .remove()
+                        .draw();
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: data.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed',
+                        text: data.message
+                    });
+                }
+            } catch (err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong.'
+                });
+                console.error(err);
+            }
+        }
     }
 
     @if(session('success'))

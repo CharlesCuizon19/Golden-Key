@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactUs extends Model
+class Newsletter extends Model
 {
     use HasFactory;
 
-    protected $table = 'contact_us'; // Add this line
+    protected $table = 'newsletters';
+
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
-        'full_name',
         'email',
-        'subject',
-        'message',
     ];
 }
