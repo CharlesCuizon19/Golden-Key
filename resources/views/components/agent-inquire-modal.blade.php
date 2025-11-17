@@ -1,8 +1,7 @@
 @props([
     'property' => [],
 ])
-
-<div x-data="{ open: true }" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="relative z-50">
+<div x-data="{ open: false }" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="relative z-50">
 
     <!-- Button -->
     <button @click="open = true" class="bg-[#ecc467] w-full p-5 rounded-lg hover:bg-[#f4d16e] transition duration-300">
@@ -33,10 +32,9 @@
 
             <!-- Modal box -->
             <div @click.stop x-transition.scale.origin.center
-                class="relative z-10 w-full max-w-4xl max-h-[90%] overflow-y-auto bg-[#101317] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
+                class="relative z-10 w-full max-w-4xl max-h-full overflow-y-auto bg-[#101317] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
                 <!-- Header -->
-                <div class="sticky top-0 flex items-center justify-between px-6 py-4 bg-[#1a2127]">
-                    <h2 class="text-2xl font-semibold text-white">Direct Inquiry</h2>
+                <div class="sticky top-0 flex items-center justify-end px-6 py-4 bg-[#1a2127]">
                     <button @click="open = false" class="text-2xl leading-none text-gray-400 hover:text-white">
                         ✕
                     </button>
@@ -44,7 +42,7 @@
 
                 <!-- Body -->
                 <form class="p-6 space-y-5">
-                    <div class="grid grid-cols-1 xl:grid-cols-2">
+                    <div class="grid grid-cols-1 gap-5 xl:grid-cols-2">
                         <div class="relative">
                             <div class="overflow-hidden rounded-lg">
                                 <img src="{{ asset($property->image) }}" alt="{{ $property->name }}" loading="lazy"
@@ -60,10 +58,26 @@
                             </div>
                         </div>
                         <div class="flex flex-col justify-between">
-                            <div class="px-4 py-2 text-sm text-[#20272D] bg-[#e6e6e6] rounded-full 2xl:text-lg">
+                            <div class="px-4 py-2 text-sm text-[#e6e6e6] bg-[#191919] rounded-full w-fit 2xl:text-lg">
                                 {{ $property->type }}
                             </div>
-                            <div class="flex items-center gap-5 text-[#656565]">
+
+                            <div class="text-3xl font-bold">
+                                {{ $property->name }}
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-2 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" class=" size-5">
+                                        <path fill="currentColor"
+                                            d="M6 .5A4.5 4.5 0 0 1 10.5 5c0 1.863-1.42 3.815-4.2 5.9a.5.5 0 0 1-.6 0C2.92 8.815 1.5 6.863 1.5 5A4.5 4.5 0 0 1 6 .5m0 3a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3" />
+                                    </svg>
+                                    <div class="lg:text-xl">
+                                        {{ $property->location }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-5 text-gray-300 bg-[#252c32] p-5 rounded-xl">
                                 <div class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24">
@@ -95,6 +109,11 @@
                                         sqm</span>
                                 </div>
                             </div>
+                            <div class="flex items-center gap-1 text-[#656565]">
+                                <span
+                                    class="text-lg font-semibold text-[#CDA23A] 2xl:text-2xl">₱{{ $property->price }}</span>
+                                <span class="text-lg 2xl:text-xl">/ {{ $property->price_type }}</span>
+                            </div>
                         </div>
                     </div>
 
@@ -122,7 +141,8 @@
                     </div>
 
                     <div class="space-y-1 text-base text-gray-400">
-                        <p>By clicking <span class="font-medium text-white">"Submit Inquiry"</span>, you agree that:</p>
+                        <p>By clicking <span class="font-medium text-white">"Submit Inquiry"</span>, you agree that:
+                        </p>
                         <ul class="ml-3 list-disc list-inside">
                             <li>You have read, understood and accepted the <a href="#"
                                     class="text-[#edc45b] hover:underline">Privacy Policy</a>.</li>
@@ -158,7 +178,7 @@
                     </div>
                 </form>
 
-                <div class="absolute inset-0 w-full h-full mt-16 -z-10">
+                <div class="absolute inset-0 w-full h-full -z-10">
                     <img src="{{ asset('images/modal-bg.png') }}" alt=""
                         class="object-cover w-full h-full" />
                 </div>

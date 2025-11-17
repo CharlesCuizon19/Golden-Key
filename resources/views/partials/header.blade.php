@@ -68,7 +68,7 @@
 
                 <!-- Desktop Actions -->
                 <div class="items-center hidden space-x-4 md:flex">
-                    <x-modal />
+                    <x-direct-inquiry-modal />
 
                     <button class="text-gray-700 hover:text-[#f37021] transition">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -147,7 +147,7 @@
             </ul>
 
             <div class="items-center hidden space-x-4 md:flex">
-                <x-modal />
+                <x-direct-inquiry-modal />
 
                 <button class="text-gray-700 hover:text-[#f37021] transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
