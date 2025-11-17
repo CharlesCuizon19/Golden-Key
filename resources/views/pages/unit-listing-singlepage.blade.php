@@ -173,23 +173,7 @@
                             </div>
                         </div>
                         <div class="grid flex-wrap grid-cols-1 gap-5 lg:grid-cols-2">
-                            <button class="bg-[#ecc467] w-full p-5 rounded-lg hover:bg-[#f4d16e] transition duration-300">
-                                <div class="flex items-center justify-center w-full gap-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-5">
-                                        <defs>
-                                            <path id="SVG2jlUvrhl"
-                                                d="M12.97 2.67a.5.5 0 0 0-.64-.64l-11 4a.5.5 0 0 0-.016.934l4.433 1.773l2.9-3.09l.707.707l-2.98 3.176l1.662 4.156a.5.5 0 0 0 .934-.015z" />
-                                        </defs>
-                                        <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
-                                            <use href="#SVG2jlUvrhl" />
-                                            <use href="#SVG2jlUvrhl" />
-                                        </g>
-                                    </svg>
-                                    <span class="text-xl text-center">
-                                        Inquire Now
-                                    </span>
-                                </div>
-                            </button>
+                            <x-agent-inquire-modal :property="$property" />
                             <button
                                 class="bg-[#20272d] hover:bg-[#39434c] transition duration-300 w-full p-5 rounded-lg text-white">
                                 <div class="flex items-center justify-center w-full gap-3">

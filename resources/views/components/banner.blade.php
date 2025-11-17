@@ -25,9 +25,12 @@
     <div class="swiper {{ Route::is('home') ? 'BannerSwiper' : '' }} max-w-[100%]">
         <div class="swiper-wrapper">
             @foreach ($banners as $item)
-                <div class="relative w-auto swiper-slide">
-                    <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}" alt=""
-                        class="object-cover {{ Route::is('home') ? '' : 'object-right' }} w-auto h-full">
+                <div class="relative w-auto h swiper-slide">
+                    <div class="w-full h-[65rem]">
+                        <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}"
+                            alt=""
+                            class="object-cover {{ Route::is('home') ? '' : 'object-right' }} w-full h-full">
+                    </div>
 
                     <div
                         class="{{ Route::is('home') ? 'hidden' : 'flex lg:hidden' }} absolute inset-0 bg-gradient-to-b from-[#20272D]/60 to-transparent z-20">
