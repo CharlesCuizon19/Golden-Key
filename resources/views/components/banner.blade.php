@@ -26,7 +26,7 @@
         <div class="swiper-wrapper">
             @foreach ($banners as $item)
                 <div class="relative w-auto h swiper-slide">
-                    <div class="w-full h-[65rem] border border-black">
+                    <div class="w-full h-[65rem]">
                         <img src="{{ Route::is('home') ? asset($item->img) : asset('images/banner2.png') }}"
                             alt=""
                             class="object-cover {{ Route::is('home') ? '' : 'object-right' }} w-full h-full">
