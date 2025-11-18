@@ -29,7 +29,7 @@
 
             <!-- Modal box -->
             <div @click.stop x-transition.scale.origin.center
-                class="relative z-10 w-full max-w-4xl max-h-full overflow-y-auto bg-[#101317] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
+                class="relative z-10 w-full max-w-2xl max-h-[90%] overflow-y-auto bg-[#1a2127] text-gray-100 border border-gray-700 rounded-xl shadow-2xl">
                 <!-- Header -->
                 <div class="sticky top-0 flex items-center justify-end px-6 py-4 bg-[#1a2127]">
                     <button @click="open = false"

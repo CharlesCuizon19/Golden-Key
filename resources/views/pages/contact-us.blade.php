@@ -85,10 +85,10 @@
                 </div>
 
                 {{-- Contact Form --}}
-                <div class="relative z-0 flex flex-col col-span-2 gap-5 overflow-hidden rounded-3xl"
+                <div class="relative z-0 flex flex-col col-span-5 gap-5 overflow-hidden lg:col-span-2 rounded-3xl"
                     x-data="contactForm()">
                     <form @submit.prevent="submitForm" class="p-10 space-y-5">
-                        <p class="font-bold text-white 2xl:text-[43px] pb-7">Tell Us How We Can Help.</p>
+                        <p class="font-bold text-white text-2xl lg:text-[43px] pb-7">Tell Us How We Can Help.</p>
 
                         <div class="space-y-10">
                             <div>
