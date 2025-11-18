@@ -16,7 +16,7 @@
             <div class="font-serif text-2xl text-white 2xl:text-7xl">
                 Newsletter
             </div>
-            <div class="text-base font-light text-center text-white lg:text-xl">
+            <div class="text-lg font-light text-center text-white lg:text-xl">
                 Stay updated with the latest property listings, market insights, and real estate tips — straight to your
                 inbox.
             </div>
@@ -26,11 +26,11 @@
                     id="newsletter-form">
                     @csrf
                     <input type="email" name="email" placeholder="Enter your email address"
-                        class="flex-grow lg:px-6 px-3 py-2 lg:py-4 text-base lg:text-xl 2xl:w-[30rem] text-gray-700 placeholder-gray-400 focus:outline-none"
+                        class="flex-grow lg:px-6 px-3 py-2 lg:py-4 text-lg lg:text-xl 2xl:w-[30rem] text-gray-700 placeholder-gray-400 focus:outline-none"
                         required>
 
                     <button type="submit"
-                        class="lg:px-7 py-2 px-4 lg:py-4 text-base lg:text-xl rounded-md text-gray-900 transition-all duration-300 bg-[#ecc467] hover:bg-[#b99a50] focus:outline-none">
+                        class="lg:px-7 py-2 px-4 lg:py-4 text-lg lg:text-xl rounded-md text-gray-900 transition-all duration-300 bg-[#ecc467] hover:bg-[#b99a50] focus:outline-none">
                         Subscribe Now
                     </button>
                 </form>
@@ -41,14 +41,12 @@
     </div>
 
     <div class="relative">
-        <div class="absolute bg-[#181f27] lg:bg-transparent">
+        <div class="absolute w-full bg-[#181f27] lg:bg-transparent">
             <div class="border-t border-b mt-14 border-gray-400/60">
-                <div class="grid grid-cols-1 gap-10 mx-3 lg:gap-40 lg:mx-20 2xl:grid-cols-3">
-                    <div class="relative flex flex-col border border-white">
-                        <img src="{{ asset('images/footer-box.png') }}" alt=""
-                            class="object-cover w-full h-full">
-                        <div class="absolute flex flex-col justify-between h-full p-5 lg:p-12">
-                            <div class="text-base lg:text-[22px] leading-relaxed">
+                <div class="grid grid-cols-1 gap-10 mx-3 lg:gap-40 lg:mx-20 lg:grid-cols-3">
+                    <div class="relative z-10 flex flex-col border border-white">
+                        <div class="flex flex-col justify-between h-full p-5 lg:p-12">
+                            <div class="text-lg lg:text-[22px] leading-relaxed">
                                 GoldenKey Real Estate and Development is a trusted real estate company dedicated to
                                 helping
                                 clients
@@ -84,6 +82,10 @@
                                     </svg>
                                 </div>
                             </div>
+                        </div>
+                        <div class="absolute inset-0 -z-10">
+                            <img src="{{ asset('images/footer-box.png') }}" alt=""
+                                class="object-cover w-full h-full">
                         </div>
                     </div>
                     <div class="py-10 space-y-5">

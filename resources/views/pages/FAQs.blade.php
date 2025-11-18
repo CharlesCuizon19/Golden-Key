@@ -7,14 +7,14 @@
         <div class="relative z-0 w-full h-full py-32 text-[#20272d]">
             <div class="flex flex-col items-center justify-center gap-10">
                 <div class="flex flex-col gap-5 text-center">
-                    <div class="font-serif 2xl:text-6xl">
+                    <div class="font-serif text-4xl lg:text-6xl">
                         Frequently Asked Questions
                     </div>
-                    <div class="2xl:text-[23px]">
+                    <div class="lg:text-[23px]">
                         Find answers to common questions about our company and services.
                     </div>
                 </div>
-                <div>
+                <div class="mx-3">
                     <div x-data="{ open: 1 }" class="w-full 2xl:min-w-[64rem] max-w-5xl space-y-5">
                         @foreach ([
             ['id' => 1, 'question' => 'What services does Golden Key offer?', 'answer' => 'Golden Key provides comprehensive real estate services — from property sales and rentals to leasing, management, and development — ensuring seamless and profitable ownership experiences.'],
@@ -23,7 +23,7 @@
             ['id' => 4, 'question' => 'What are the requirements to rent or lease a unit?', 'answer' => 'Requirements include valid identification, proof of income, and a signed lease agreement. Additional documents may be requested depending on the property.'],
             ['id' => 5, 'question' => 'Can you assist with property investment opportunities?', 'answer' => 'Absolutely! We offer consultancy services and market insights to help clients make informed investment decisions tailored to their financial goals.'],
         ] as $faq)
-                            <div class="overflow-hidden text-sm transition-all duration-300 border rounded-lg lg:text-xl"
+                            <div class="overflow-hidden text-lg transition-all duration-300 border rounded-lg lg:text-xl"
                                 :class="open === {{ $faq['id'] }} ? 'shadow-lg' : 'shadow-none'">
                                 <button @click="open === {{ $faq['id'] }} ? open = null : open = {{ $faq['id'] }}"
                                     class="flex items-center justify-between w-full px-6 py-4 font-semibold text-left transition"
@@ -45,10 +45,10 @@
                 </div>
 
                 <div class="flex flex-col items-center justify-center gap-5">
-                    <div class="text-5xl font-bold">
+                    <div class="text-4xl font-bold lg:text-5xl">
                         Still have questions?
                     </div>
-                    <div class="text-[23px]">
+                    <div class="text-lg text-center lg:text-[23px]">
                         Don't hesitate to send us a message with your inquiry or statement.
                     </div>
                     <x-button buttonName="Contact Us Now" route="home" />

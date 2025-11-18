@@ -37,7 +37,7 @@
     <div class="container relative z-10 flex flex-col gap-10 mx-auto">
         <div class="flex flex-col items-center justify-center gap-10">
             <x-title title="Discover More" />
-            <div class="font-serif 2xl:text-7xl text-xl text-[#20272d]">
+            <div class="font-serif text-3xl lg:text-5xl 2xl:text-7xl text-[#20272d]">
                 Find Properties in These Cities
             </div>
         </div>
@@ -72,16 +72,18 @@
     </div>
 
     <!-- Navigation Buttons -->
-    <div class="hidden 2xl:flex absolute w-full top-[55%]">
+    <div class="hidden md:flex absolute w-full top-[55%]">
         <div class="flex justify-between w-full">
-            <button class="p-2 border rounded-lg border-[#D3AC4E]/70 bg-white/10 group ml-24 customized-button-prev">
+            <button
+                class="p-2 border rounded-lg border-[#D3AC4E]/70 bg-white/10 group ml-16 lg:ml-24 customized-button-prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     class="text-[#D3AC4E] transition duration-300 size-10 group-hover:-translate-x-1">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="1.5" d="m14 7l-5 5l5 5" />
                 </svg>
             </button>
-            <button class="p-2 border rounded-lg bg-white/10 border-[#D3AC4E]/70 group mr-24 customized-button-next">
+            <button
+                class="p-2 border rounded-lg bg-white/10 border-[#D3AC4E]/70 group mr-16 lg:mr-24 customized-button-next">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     class="text-[#D3AC4E] transition duration-300 size-10 group-hover:translate-x-1">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
