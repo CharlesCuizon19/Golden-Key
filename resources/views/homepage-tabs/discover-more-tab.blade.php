@@ -34,16 +34,16 @@
 @endphp
 
 <div class="bg-[#f9f9f9] py-24 relative overflow-hidden">
-    <div class="container relative z-10 flex flex-col gap-10 mx-auto">
+    <div class="container relative z-10 flex flex-col gap-10 mx-auto pointer-events-none">
         <div class="flex flex-col items-center justify-center gap-10">
             <x-title title="Discover More" />
-            <div class="font-serif text-3xl lg:text-5xl 2xl:text-7xl text-[#20272d]">
+            <div class="font-serif text-center text-3xl lg:text-5xl 2xl:text-7xl text-[#20272d]">
                 Find Properties in These Cities
             </div>
         </div>
 
         <!-- Swiper Container -->
-        <div class="swiper myPropertiesSwiper max-w-[100%]">
+        <div class="swiper myPropertiesSwiper max-w-[90%]">
             <div class="swiper-wrapper">
                 @foreach ($properties as $item)
                     <div class="swiper-slide">
@@ -75,7 +75,7 @@
     <div class="hidden md:flex absolute w-full top-[55%]">
         <div class="flex justify-between w-full">
             <button
-                class="p-2 border rounded-lg border-[#D3AC4E]/70 bg-white/10 group ml-16 lg:ml-24 customized-button-prev">
+                class="p-2 border rounded-lg border-[#D3AC4E]/70 bg-white/10 group ml-16 xl:ml-24 customized-button-prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     class="text-[#D3AC4E] transition duration-300 size-10 group-hover:-translate-x-1">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +83,7 @@
                 </svg>
             </button>
             <button
-                class="p-2 border rounded-lg bg-white/10 border-[#D3AC4E]/70 group mr-16 lg:mr-24 customized-button-next">
+                class="p-2 border rounded-lg bg-white/10 border-[#D3AC4E]/70 group mr-16 xl:mr-24 customized-button-next">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     class="text-[#D3AC4E] transition duration-300 size-10 group-hover:translate-x-1">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -113,7 +113,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         new Swiper('.myPropertiesSwiper', {
-            slidesPerView: 5,
             spaceBetween: 30,
             loop: true,
             navigation: {
@@ -129,7 +128,7 @@
                     slidesPerView: 1
                 },
                 640: {
-                    slidesPerView: 2
+                    slidesPerView: 1
                 },
                 1024: {
                     slidesPerView: 3
@@ -138,6 +137,9 @@
                     slidesPerView: 4
                 },
                 1536: {
+                    slidesPerView: 3
+                },
+                1700: {
                     slidesPerView: 5
                 },
             },

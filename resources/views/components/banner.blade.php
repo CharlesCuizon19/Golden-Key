@@ -58,10 +58,10 @@
     </div>
 
     <div
-        class="absolute top-0 z-10 left-0 md:-left-[15rem] xl:-left-[20rem] 2xl:left-0 lg:z-40 pointer-events-none h-[65rem] overflow-hidden">
+        class="absolute top-0 z-10 left-0 md:left-0 lg:-left-[15rem] xl:-left-[20rem] 2xl:-left-[5rem]  lg:z-40 pointer-events-none h-[65rem] xl:overflow-hidden">
         <div class="relative transition-all duration-1000 ease-in-out -z-10 floater">
             <div
-                class="absolute z-[9999] top-[1rem] left-[20rem] xl:left-[22rem] 2xl:left-32 text-lg font-bold text-[#f37021]">
+                class="absolute z-[9999] top-[1rem] left-[20rem] xl:left-[22rem] 2xl:left-40 text-lg font-bold text-[#f37021]">
                 <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[110px] lg:flex hidden">
             </div>
             <div class="{{ Route::is('home') ? '' : 'h-[23rem] overflow-hidden' }}">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-[22rem] 2xl:left-32">
+            <div class="absolute top-0 flex items-center justify-center h-full mt-10 left-[22rem] 2xl:left-40">
                 <section
                     class="py-20 text-white transition-all duration-1000 ease-in-out translate-x-10 opacity-0 form-section {{ Route::is('home') ? 'flex' : 'hidden' }}">
                     <div class="max-w-3xl mx-auto">
@@ -188,10 +188,10 @@
 </div>
 
 {{-- MOBILE VIEW --}}
-<div class="{{ Route::is('home') ? 'flex' : 'hidden' }} h-[23rem] pt-[50px] flex lg:hidden">
+<div class="{{ Route::is('home') ? 'flex' : 'hidden' }} h-[23rem] pt-[50px] flex lg:hidden overflow-hidden">
     <div class="">
         <!-- Swiper Container -->
-        <div class="relative w-full h-full max-w-screen-lg swiper mobileSwiper">
+        <div class="relative w-full h-full max-w-4xl swiper mobileSwiper">
             <div class="hidden swiper-wrapper">
                 @foreach ($banners as $item)
                     <div class="relative w-full h-full swiper-slide">

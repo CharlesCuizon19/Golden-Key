@@ -172,7 +172,7 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <div class="font-serif text-2xl lg:text-6xl text-[#20272d]">
+                                    <div class="font-serif text-2xl text-nowrap lg:text-6xl text-[#20272d]">
                                         Core Values
                                     </div>
                                 </div>

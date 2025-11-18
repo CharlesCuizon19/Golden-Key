@@ -26,7 +26,7 @@
                                                 d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92" />
                                         </svg>
                                     </div>
-                                    <div class="text-lg font-medium lg:text-lg">
+                                    <div class="text-sm font-medium lg:text-lg">
                                         Copy Link
                                     </div>
                                 </button>
@@ -44,18 +44,6 @@
 
                                 {{-- Show overlay only on 4th image --}}
                                 @if ($index === 3 && $property->images->count() > 4)
-                                    <div class="absolute inset-0 w-full h-full bg-black/40 rounded-xl">
-                                        <div class="flex items-center justify-center h-full">
-                                            <div class="flex items-center gap-2 text-white cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                                                </svg>
-                                                <div class="text-lg font-semibold">Show more photos</div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <x-gallery-modal2 :images="$property->images->pluck('image_path')" imageGalleryCount="{{ $imageGallery_count }}" />
                                 @endif
                             </div>
@@ -70,19 +58,29 @@
                     <div class="text-5xl font-bold">
                         {{ $property->title }}
                     </div>
-                    <div class="flex flex-col gap-5">
-                        <div class="text-2xl leading-snug text-black/80 line-clamp-5">
+                    <div x-data="{ expanded: false }" class="flex flex-col gap-5">
+
+                        <!-- Description -->
+                        <div :class="expanded ? 'line-clamp-none' : 'line-clamp-5'"
+                            class="text-lg leading-snug transition-all duration-300 lg:text-2xl text-black/80">
                             {{ $property->property_desc }}
                         </div>
-                        <div class="flex items-center gap-2">
-                            <div class="text-2xl font-bold text-black/80">
-                                Read More
+
+                        <!-- Read More / Less Button -->
+                        <div class="flex items-center gap-2 cursor-pointer select-none" @click="expanded = !expanded">
+
+                            <div class="text-lg lg:text-2xl text-black/80">
+                                <span x-text="expanded ? 'Read Less' : 'Read More'" class="font-bold"></span>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                :class="expanded ? 'rotate-180' : ''" class="transition-transform duration-300">
                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="1.5" d="m7 10l5 5l5-5" />
                             </svg>
+
                         </div>
+
                     </div>
                     <div class="flex flex-col gap-5 mt-7">
                         <x-title title="Facilities" />
@@ -148,9 +146,10 @@
                         </div>
 
                         <div class="text-5xl font-bold text-[#cda23a] flex items-center gap-2">
-                            ₱ {{ $property->price }} <span class="text-2xl font-thin text-white">/
-                                {{ $property->price_status }}</span>
+                            ₱ {{ number_format($property->price, 0, '.', ',') }}
+                            <span class="text-2xl font-thin text-white">/ {{ $property->price_status }}</span>
                         </div>
+
                         <div class="absolute -right-10 -top-10">
                             <img src="{{ asset('images/logo-floater.png') }}" alt="">
                         </div>

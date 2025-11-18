@@ -73,10 +73,23 @@
 
                     <div class="flex items-center gap-3 pt-4 border-t border-gray-700">
                         <button type="submit"
-                            class="gap-2 bg-[#ecc467] w-full hover:bg-[#e6b74e] text-black font-medium text-lg px-6 py-3 rounded-md transition">Submit
-                            Inquiry</button>
+                            class="gap-2 bg-[#ecc467] w-full hover:bg-[#e6b74e] text-black font-medium text-lg px-6 py-3 rounded-md transition">
+                            <div class="flex items-center justify-center w-full gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-5">
+                                    <defs>
+                                        <path id="SVG2jlUvrhl"
+                                            d="M12.97 2.67a.5.5 0 0 0-.64-.64l-11 4a.5.5 0 0 0-.016.934l4.433 1.773l2.9-3.09l.707.707l-2.98 3.176l1.662 4.156a.5.5 0 0 0 .934-.015z" />
+                                    </defs>
+                                    <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                        <use href="#SVG2jlUvrhl" />
+                                        <use href="#SVG2jlUvrhl" />
+                                    </g>
+                                </svg>
+                                <span class="text-xl text-center">Submit Inquiry</span>
+                            </div>
+                        </button>
                         <button type="button"
-                            class="px-6 py-4 w-full text-lg text-[#091A39] font-medium bg-[#e2e2e2] border border-gray-600 rounded-md"
+                            class="px-6 py-3 w-full text-lg text-[#091A39] font-medium bg-[#e2e2e2] border border-gray-600 rounded-md"
                             @click="open = false">Cancel</button>
                     </div>
                 </form>

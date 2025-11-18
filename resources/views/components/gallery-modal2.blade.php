@@ -13,13 +13,14 @@
                     <path fill="currentColor"
                         d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
                 </svg>
-                <div class="text-lg font-semibold">Show more photos</div>
+                <div class="text-sm font-medium lg:text-lg">Show more photos</div>
             </div>
         </div>
     </div>
 
     {{-- Modal --}}
-    <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+    <div x-show="open" x-transition
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
         @click.self="open = false">
         <div class="relative w-full max-w-5xl bg-white p-7 rounded-xl">
             <button @click="open = false" class="absolute text-gray-600 top-2 right-3 hover:text-black">✕</button>
@@ -69,18 +70,14 @@
                     @endforeach
                 </div>
             </div>
-            <div class="hidden w-full lg:flex">
-                <div class="swiper-pagination2"></div>
+            <div class="items-center justify-center hidden w-full lg:flex">
+                <div class="swiper-pagination2 !w-fit"></div>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    [x-cloak] {
-        display: none !important;
-    }
-
     .swiper-pagination2-bullet {
         width: 12px;
         height: 12px;

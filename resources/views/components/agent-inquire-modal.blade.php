@@ -1,7 +1,7 @@
 @props([
     'property' => null,
 ])
-<div x-data="inquiryModal()" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="relative z-50">
+<div x-data="inquiryModal()" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="relative z-40">
 
     <!-- Button -->
     <button @click="open = true" class="bg-[#ecc467] w-full p-5 rounded-lg hover:bg-[#f4d16e] transition duration-300">
@@ -22,7 +22,7 @@
 
     <!-- Modal -->
     <template x-teleport="body">
-        <div x-show="open" x-transition x-cloak class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+        <div x-show="open" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4"
             aria-modal="true">
             <!-- Overlay -->
             <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="open = false"></div>
