@@ -11,6 +11,7 @@ class Unit extends Model
 
     protected $fillable = [
         'title',
+        'description',
         'sqm',
         'location_text',
         'location_embedded',
@@ -19,6 +20,8 @@ class Unit extends Model
         'status',
         'agent_id',
         'unit_type_id',
+        'unit_location_id',
+        'barangay',
     ];
 
     // Relationships
@@ -30,6 +33,11 @@ class Unit extends Model
     public function type()
     {
         return $this->belongsTo(UnitType::class, 'unit_type_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(UnitLocation::class, 'unit_location_id');
     }
 
     public function images()

@@ -7,6 +7,7 @@ use App\Models\UnitImage;
 use App\Models\Agent;
 use App\Models\UnitType;
 use App\Models\UnitFeature;
+use App\Models\UnitLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +15,7 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $units = Unit::with(['agent', 'type', 'images', 'features'])->latest()->paginate(10);
+        $units = Unit::with(['agent', 'type', 'images', 'features', 'location'])->latest()->paginate(10);
         return view('admin.units.index', compact('units'));
     }
 
@@ -33,8 +34,12 @@ class UnitController extends Controller
         try {
             $validated = $request->validate([
                 'title'               => 'required|string|max:255',
+                'description'         => 'required|string',
                 'sqm'                 => 'required|numeric',
-                'location_text'       => 'nullable|string|max:255',
+                'province'            => 'nullable|string|max:100',
+                'city'                => 'nullable|string|max:100',
+                'barangay'            => 'nullable|string|max:100',
+                'zip_code'            => 'nullable|string|max:10',
                 'location_embedded'   => 'nullable|string',
                 'price'               => 'required|numeric',
                 'price_status'        => 'required|string|in:fixed,monthly',
@@ -47,9 +52,31 @@ class UnitController extends Controller
                 'features.*.quantity' => 'required|integer|min:1',
             ]);
 
-            $unit = Unit::create($validated);
+            // Handle UnitLocation: avoid duplicates
+            $unitLocationId = null;
+            if (!empty($validated['province']) && !empty($validated['city'])) {
+                $unitLocation = UnitLocation::firstOrCreate(
+                    [
+                        'province' => $validated['province'],
+                        'city'     => $validated['city']
+                    ],
+                    [
+                        'zip_code' => $validated['zip_code'] ?? null,
+                        'image'    => null
+                    ]
+                );
+                $unitLocationId = $unitLocation->id;
+            }
 
-            // Attach features with quantities
+            // Create Unit
+            $unitData = $validated;
+            if ($unitLocationId) {
+                $unitData['unit_location_id'] = $unitLocationId;
+            }
+
+            $unit = Unit::create($unitData);
+
+            // Attach features
             if (!empty($validated['features'])) {
                 $featureData = [];
                 foreach ($validated['features'] as $feature) {
@@ -63,14 +90,13 @@ class UnitController extends Controller
                 foreach ($request->file('images') as $file) {
                     $filename = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path('storage/unit_images'), $filename);
-                    UnitImage::create([
-                        'unit_id'    => $unit->id,
+                    $unit->images()->create([
                         'image_path' => 'storage/unit_images/' . $filename,
                     ]);
                 }
             }
 
-            return redirect()->route('admin.units.index')->with('success', 'Unit created successfully.');
+            return redirect()->route('admin.units.index')->with('success', 'Unit and location saved successfully.');
         } catch (\Exception $e) {
             Log::error('Error storing unit', [
                 'message' => $e->getMessage(),
@@ -99,8 +125,12 @@ class UnitController extends Controller
         try {
             $validated = $request->validate([
                 'title'               => 'required|string|max:255',
+                'description'         => 'required|string',
                 'sqm'                 => 'required|numeric',
-                'location_text'       => 'nullable|string|max:255',
+                'province'            => 'nullable|string|max:100',
+                'city'                => 'nullable|string|max:100',
+                'barangay'            => 'nullable|string|max:100',
+                'zip_code'            => 'nullable|string|max:10',
                 'location_embedded'   => 'nullable|string',
                 'price'               => 'required|numeric',
                 'price_status'        => 'required|string|in:fixed,monthly',
@@ -114,6 +144,26 @@ class UnitController extends Controller
                 'features.*.id'       => 'required|integer|exists:unit_features,id',
                 'features.*.quantity' => 'required|integer|min:1',
             ]);
+
+            // Update or create UnitLocation: avoid duplicates
+            $unitLocationId = null;
+            if (!empty($validated['province']) && !empty($validated['city'])) {
+                $unitLocation = UnitLocation::firstOrCreate(
+                    [
+                        'province' => $validated['province'],
+                        'city'     => $validated['city']
+                    ],
+                    [
+                        'zip_code' => $validated['zip_code'] ?? null,
+                        'image'    => null
+                    ]
+                );
+                $unitLocationId = $unitLocation->id;
+            }
+
+            if ($unitLocationId) {
+                $validated['unit_location_id'] = $unitLocationId;
+            }
 
             $unit->update($validated);
 
@@ -177,6 +227,7 @@ class UnitController extends Controller
         // Detach features
         $unit->features()->detach();
 
+        // Delete unit
         $unit->delete();
 
         return redirect()->route('admin.units.index')->with('success', 'Unit deleted successfully.');

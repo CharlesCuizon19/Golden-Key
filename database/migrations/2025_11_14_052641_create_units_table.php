@@ -16,12 +16,14 @@ return new class extends Migration
             $table->foreignId('agent_id')->nullable()->constrained('agents')->onDelete('set null');
             $table->foreignId('unit_type_id')->nullable()->constrained('unit_types')->onDelete('set null');
             $table->string('title');
+            $table->text('description')->nullable();
             $table->decimal('sqm', 8, 2);
             $table->decimal('price', 15, 2);
             $table->enum('price_status', ['fixed', 'monthly'])->default('fixed');
             $table->enum('status', ['for_sale', 'for_rent', 'for_lease'])->default('for_sale');
-            $table->string('location_text')->nullable();
             $table->text('location_embedded')->nullable();
+            $table->foreignId('unit_location_id')->nullable()->constrained('unit_locations')->onDelete('set null');
+            $table->string('barangay', 100);
             $table->timestamps();
         });
     }

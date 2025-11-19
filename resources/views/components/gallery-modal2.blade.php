@@ -1,7 +1,7 @@
 @props([
-    'images' => [],
-    'imageGalleryCount' => '',
-    'buttonType' => '',
+'images' => [],
+'imageGalleryCount' => '',
+'buttonType' => '',
 ])
 
 
@@ -19,7 +19,7 @@
     </div>
 
     {{-- Modal --}}
-    <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+    <div x-show="open" x-transition class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"
         @click.self="open = false">
         <div class="relative w-full max-w-5xl bg-white p-7 rounded-xl">
             <button @click="open = false" class="absolute text-gray-600 top-2 right-3 hover:text-black">✕</button>
@@ -28,10 +28,10 @@
             <div class="swiper main-swiper2">
                 <div class="swiper-wrapper">
                     @foreach ($images as $image)
-                        <div class="swiper-slide">
-                            <img src="{{ asset($image) }}" class="object-cover w-full rounded-lg aspect-video"
-                                alt="">
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset($image) }}" class="object-cover w-full rounded-lg aspect-video"
+                            alt="">
+                    </div>
                     @endforeach
                 </div>
 
@@ -62,10 +62,10 @@
             <div class="mt-4 mb-5 swiper thumb-swiper2">
                 <div class="flex justify-between swiper-wrapper">
                     @foreach ($images as $image)
-                        <div class="swiper-slide">
-                            <img src="{{ asset($image) }}" class="object-cover w-full h-20 rounded-lg cursor-pointer"
-                                alt="">
-                        </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset($image) }}" class="object-cover w-full h-20 rounded-lg cursor-pointer"
+                            alt="">
+                    </div>
                     @endforeach
                 </div>
             </div>

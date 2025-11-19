@@ -25,6 +25,7 @@
         <thead>
             <tr class="bg-[#121212] text-[#ecc467] text-sm font-semibold">
                 <th class="px-6 py-3">Title</th>
+                <th class="px-6 py-3">Description</th>
                 <th class="px-6 py-3">Agent</th>
                 <th class="px-6 py-3">Type</th>
                 <th class="px-6 py-3">Price</th>
@@ -37,6 +38,10 @@
             @forelse($units as $unit)
             <tr class="border-t border-[#2c2c2c] hover:bg-[#2c2c2c] transition">
                 <td class="px-6 py-3">{{ $unit->title }}</td>
+                <td class="px-6 py-3 max-w-xs truncate" title="{{ $unit->description }}">
+                    {{ $unit->description }}
+                </td>
+
                 <td class="px-6 py-3">{{ $unit->agent->name ?? 'N/A' }}</td>
                 <td class="px-6 py-3">{{ $unit->type->name ?? 'N/A' }}</td>
 
@@ -93,7 +98,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="text-center py-6 text-gray-400">No units found.</td>
+                <td colspan="8" class="text-center py-6 text-gray-400">No units found.</td>
             </tr>
             @endforelse
         </tbody>

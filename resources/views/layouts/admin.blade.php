@@ -89,56 +89,75 @@
                         </a>
                     </li>
 
-                    <!-- Unit Type -->
-                    <li>
-                        <a href="{{ route('admin.unit-type.index') }}"
-                            class="flex items-center px-3 py-2 rounded-lg transition
-        {{ request()->routeIs('admin.unit-type.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
+                    <!-- Units Dropdown -->
+                    <li x-data="{ open: {{ request()->routeIs('admin.units.*') || request()->routeIs('admin.unit-type.*') || request()->routeIs('admin.unit-feature.*') || request()->routeIs('admin.locations.*') ? 'true' : 'false' }} }">
+                        <button
+                            @click="open = !open"
+                            class="flex items-center w-full px-3 py-2 rounded-lg transition
+        {{ request()->routeIs('admin.units.*') || request()->routeIs('admin.unit-type.*') || request()->routeIs('admin.unit-feature.*') || request()->routeIs('admin.locations.*') 
+            ? 'bg-[#ecc467]/20 text-[#ecc467]' 
+            : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
                             :class="{ 'justify-center': !sidebarOpen, 'justify-start': sidebarOpen }">
-
-                            <!-- Tag Icon for Unit Type -->
+                            <!-- Folder Icon -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7 7h.01M4 4h16v16H4V4z" />
+                                    d="M3 7h5l2 2h11v9a2 2 0 01-2 2H3V7z" />
                             </svg>
-                            <span x-show="sidebarOpen" x-transition class="ml-3">Unit Type</span>
-                        </a>
+
+                            <span x-show="sidebarOpen" x-transition class="ml-3">Units Management</span>
+
+                            <!-- Arrow -->
+                            <svg x-show="sidebarOpen" xmlns="http://www.w3.org/2000/svg"
+                                :class="open ? 'rotate-180' : 'rotate-0'"
+                                class="h-4 w-4 ml-auto transform transition-transform"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown Items -->
+                        <ul x-show="open" x-transition class="mt-1 ml-8 space-y-1" style="display: none;">
+
+                            <!-- Units -->
+                            <li>
+                                <a href="{{ route('admin.units.index') }}"
+                                    class="flex items-center px-3 py-2 rounded-lg transition
+                {{ request()->routeIs('admin.units.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}">
+                                    Units
+                                </a>
+                            </li>
+
+                            <!-- Unit Type -->
+                            <li>
+                                <a href="{{ route('admin.unit-type.index') }}"
+                                    class="flex items-center px-3 py-2 rounded-lg transition
+                {{ request()->routeIs('admin.unit-type.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}">
+                                    Unit Type
+                                </a>
+                            </li>
+
+                            <!-- Unit Feature -->
+                            <li>
+                                <a href="{{ route('admin.unit-feature.index') }}"
+                                    class="flex items-center px-3 py-2 rounded-lg transition
+                {{ request()->routeIs('admin.unit-feature.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}">
+                                    Unit Feature
+                                </a>
+                            </li>
+
+                            <!-- Unit Location -->
+                            <li>
+                                <a href="{{ route('admin.unit-location.index') }}"
+                                    class="flex items-center px-3 py-2 rounded-lg transition
+                {{ request()->routeIs('admin.locations.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}">
+                                    Unit Location
+                                </a>
+                            </li>
+                        </ul>
+
                     </li>
 
-                    <!-- Unit Feature -->
-                    <li>
-                        <a href="{{ route('admin.unit-feature.index') }}"
-                            class="flex items-center px-3 py-2 rounded-lg transition
-        {{ request()->routeIs('admin.unit-feature.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
-                            :class="{ 'justify-center': !sidebarOpen, 'justify-start': sidebarOpen }">
-
-                            <!-- Tag Icon for Unit Type -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7 7h.01M4 4h16v16H4V4z" />
-                            </svg>
-                            <span x-show="sidebarOpen" x-transition class="ml-3">Unit Feature</span>
-                        </a>
-                    </li>
-
-                    <!-- Units -->
-                    <li>
-                        <a href="{{ route('admin.units.index') }}"
-                            class="flex items-center px-3 py-2 rounded-lg transition
-        {{ request()->routeIs('admin.units.*') ? 'bg-[#ecc467]/20 text-[#ecc467]' : 'hover:bg-[#ecc467]/10 text-gray-300 hover:text-white' }}"
-                            :class="{ 'justify-center': !sidebarOpen, 'justify-start': sidebarOpen }">
-
-                            <!-- Home Icon for Units -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3 12l9-9 9 9v9a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4H9v4a2 2 0 01-2 2H3v-9z" />
-                            </svg>
-                            <span x-show="sidebarOpen" x-transition class="ml-3">Units</span>
-                        </a>
-                    </li>
 
                     <!-- Agents -->
                     <li>

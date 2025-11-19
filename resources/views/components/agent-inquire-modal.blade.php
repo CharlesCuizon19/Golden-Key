@@ -1,10 +1,10 @@
 @props([
-    'property' => null,
+'property' => null,
 ])
 <div x-data="inquiryModal()" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="relative z-50">
 
     <!-- Button -->
-    <button @click="open = true" class="bg-[#ecc467] w-full p-5 rounded-lg hover:bg-[#f4d16e] transition duration-300">
+    <button @click="open = true" class="bg-[#ecc467] w-full p-5 z-0 rounded-lg hover:bg-[#f4d16e] transition duration-300">
         <div class="flex items-center justify-center w-full gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-5">
                 <defs>
@@ -77,19 +77,19 @@
                             <!-- Bedrooms & Bathrooms -->
                             <div class="flex items-center gap-5 text-gray-300 bg-[#252c32] p-5 rounded-xl">
                                 @foreach ($property->features as $feature)
-                                    <div class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <g fill="currentColor">
-                                                <path
-                                                    d="M3 6a1 1 0 0 1 .993.883L4 7v6h6V8a1 1 0 0 1 .883-.993L11 7h8a3 3 0 0 1 2.995 2.824L22 10v8a1 1 0 0 1-1.993.117L20 18v-3H4v3a1 1 0 0 1-1.993.117L2 18V7a1 1 0 0 1 1-1" />
-                                                <path d="M7 8a2 2 0 1 1-1.995 2.15L5 10l.005-.15A2 2 0 0 1 7 8" />
-                                            </g>
-                                        </svg>
-                                        <span class="text-sm font-bold 2xl:text-xl">
-                                            {{ $feature->pivot->quantity }} {{ $feature->feature_name }}
-                                        </span>
-                                    </div>
+                                <div class="flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24">
+                                        <g fill="currentColor">
+                                            <path
+                                                d="M3 6a1 1 0 0 1 .993.883L4 7v6h6V8a1 1 0 0 1 .883-.993L11 7h8a3 3 0 0 1 2.995 2.824L22 10v8a1 1 0 0 1-1.993.117L20 18v-3H4v3a1 1 0 0 1-1.993.117L2 18V7a1 1 0 0 1 1-1" />
+                                            <path d="M7 8a2 2 0 1 1-1.995 2.15L5 10l.005-.15A2 2 0 0 1 7 8" />
+                                        </g>
+                                    </svg>
+                                    <span class="text-sm font-bold 2xl:text-xl">
+                                        {{ $feature->pivot->quantity }} {{ $feature->feature_name }}
+                                    </span>
+                                </div>
                                 @endforeach
                             </div>
 

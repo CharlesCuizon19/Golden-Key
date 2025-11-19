@@ -3,15 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\UnitLocation;
 use App\Models\UnitType;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+
     public function home()
     {
-        return view('pages.home');
+        // Keep your existing properties
+        $properties = Unit::with(['images', 'type', 'features', 'location'])
+            ->latest()
+            ->take(6)
+            ->get();
+
+        // Fetch locations dynamically for the "Discover More" slider
+        $locations = UnitLocation::withCount('units')
+            ->latest()
+            ->take(6)
+            ->get();
+
+        return view('pages.home', compact('properties', 'locations'));
     }
+
+
+
     public function about_us()
     {
         return view('pages.about-us');
@@ -19,16 +36,20 @@ class PageController extends Controller
     public function unit_listing()
     {
         // Fetch all units with relations
-        $units = Unit::with(['agent', 'type', 'features', 'images'])->get();
+        $units = Unit::with(['agent', 'type', 'features', 'images', 'location'])->get();
 
         // Transform units for the front-end
         $unitsData = $units->map(function ($unit) {
+            $locationText = $unit->location
+                ? trim("{$unit->location->province}, {$unit->barangay}, {$unit->location->city}")
+                : 'N/A';
+
             return (object)[
                 'id' => $unit->id,
                 'name' => $unit->title,
                 'type' => $unit->type?->name ?? 'N/A',
                 'status' => ucfirst(str_replace('_', ' ', $unit->status)),
-                'location' => $unit->location_text,
+                'location' => $locationText,
                 'area' => $unit->sqm,
                 'price' => number_format($unit->price),
                 'price_type' => $unit->price_status === 'fixed' ? 'fixed' : 'month',
@@ -49,7 +70,7 @@ class PageController extends Controller
         // Dynamic filters
         $types = UnitType::pluck('name')->toArray();
         $statuses = ['For Sale', 'For Rent', 'For Lease'];
-        $cities = Unit::pluck('location_text')->unique()->toArray();
+        $cities = Unit::with('location')->get()->pluck('location.city')->unique()->toArray();
         $priceRanges = ['₱0 - ₱1M', '₱1M - ₱5M', '₱5M+'];
         $areaRanges = ['0 - 50 sqm', '50 - 100 sqm', '100+ sqm'];
         $sortOptions = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
@@ -64,6 +85,7 @@ class PageController extends Controller
             'sortOptions'
         ));
     }
+
 
 
 

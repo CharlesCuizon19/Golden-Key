@@ -12,6 +12,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UnitFeatureController;
 use App\Http\Controllers\UnitInquiryController;
+use App\Http\Controllers\UnitLocationController;
 use App\Http\Controllers\UnitTypeController;
 use App\Models\ContactUs;
 
@@ -60,4 +61,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('agents', AgentController::class);
     Route::resource('unit-inquiries', UnitInquiryController::class);
     Route::resource('newsletters', NewsletterController::class);
+    Route::resource('unit-location', UnitLocationController::class);
 });
