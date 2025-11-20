@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+[x-cloak] {
+        display: none !important;
+    }
+
 /* Dark Table Styling */
 .dataTables_wrapper {
     color: #eee;

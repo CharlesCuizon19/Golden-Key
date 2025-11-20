@@ -51,7 +51,7 @@
                     <div class="text-lg text-center lg:text-[23px]">
                         Don't hesitate to send us a message with your inquiry or statement.
                     </div>
-                    <x-button buttonName="Contact Us Now" route="home" />
+                    <x-button buttonName="Contact Us Now" route="contact-us" />
                 </div>
             </div>
             <div class="absolute inset-0 w-full h-full -z-10">

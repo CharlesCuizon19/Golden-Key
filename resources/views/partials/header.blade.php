@@ -44,7 +44,7 @@
 
                 <!-- Desktop Nav -->
                 <ul class="items-center hidden space-x-12 text-lg text-gray-700 lg:flex">
-                    <li class="relative z-[9999]">
+                    <li>
                         <a href="{{ route('home') }}"
                             class=" hover:text-[#f37021] {{ Route::is('home') ? 'font-bold text-black' : 'font-normal' }}">Home</a>
                     </li>
@@ -118,7 +118,7 @@
 
 <!-- Sticky Header on Scroll -->
 <div x-data="{ show: false }" x-init="window.addEventListener('scroll', () => { show = window.scrollY > 50 })" x-show="show" x-transition.duration.300.opacity
-    class="fixed top-0 left-0 z-[9999] hidden w-full bg-white shadow-md xl:flex">
+    class="fixed top-0 left-0 z-50 hidden w-full bg-white shadow-md xl:flex">
     <div class="flex items-center justify-between w-full px-6 py-4 2xl:mr-[8rem]">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="flex size-16 2xl:ml-[8rem]">
         <div class="flex items-center gap-10">

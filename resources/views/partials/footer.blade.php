@@ -94,7 +94,7 @@
                                 Quick Links
                             </div>
                             <div class="grid grid-cols-1 gap-y-2 gap-x-20 2xl:grid-cols-2">
-                                <a href="#" class="flex items-center gap-2">
+                                <a href="{{ route('home') }}" class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         viewBox="0 0 24 24" class="text-[#ECC467]">
                                         <path fill="currentColor" d="M18.4 12.5L9 18.38L8 19V6zm-1.9 0L9 7.8v9.4z" />
@@ -103,7 +103,7 @@
                                         Home
                                     </span>
                                 </a>
-                                <a href="#" class="flex items-center gap-2">
+                                <a href="{{ route('about-us') }}" class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         viewBox="0 0 24 24" class="text-[#ECC467]">
                                         <path fill="currentColor" d="M18.4 12.5L9 18.38L8 19V6zm-1.9 0L9 7.8v9.4z" />
@@ -112,7 +112,7 @@
                                         About Us
                                     </span>
                                 </a>
-                                <a href="#" class="flex items-center gap-2">
+                                <a href="{{ route('unit-listing.all') }}" class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         viewBox="0 0 24 24" class="text-[#ECC467]">
                                         <path fill="currentColor" d="M18.4 12.5L9 18.38L8 19V6zm-1.9 0L9 7.8v9.4z" />
@@ -121,7 +121,7 @@
                                         Unit Listing
                                     </span>
                                 </a>
-                                <a href="#" class="flex items-center gap-2">
+                                <a href="{{ route('FAQs') }}" class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         viewBox="0 0 24 24" class="text-[#ECC467]">
                                         <path fill="currentColor" d="M18.4 12.5L9 18.38L8 19V6zm-1.9 0L9 7.8v9.4z" />
@@ -130,7 +130,7 @@
                                         FAQs
                                     </span>
                                 </a>
-                                <a href="#" class="flex items-center gap-2">
+                                <a href="{{ route('contact-us') }}" class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         viewBox="0 0 24 24" class="text-[#ECC467]">
                                         <path fill="currentColor" d="M18.4 12.5L9 18.38L8 19V6zm-1.9 0L9 7.8v9.4z" />
