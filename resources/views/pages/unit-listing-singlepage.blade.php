@@ -210,7 +210,7 @@
                         <div class="text-2xl font-bold text-black/80">
                             Agent Details
                         </div>
-                        <div class="flex flex-wrap justify-between w-full p-5 bg-white border rounded-xl">
+                        <div class="flex flex-wrap justify-between w-full gap-3 p-5 bg-white border lg:gap-0 rounded-xl">
                             <div class="flex items-center gap-3">
                                 <img src="{{ asset($property->agent->image ?? 'images/sample-user.avif') }}"
                                     alt="{{ $property->agent->name ?? 'Agent Image' }}"
@@ -224,7 +224,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="bg-[#f3f3f3] rounded-lg text-center text-[#656565] p-3 flex flex-col gap-2">
+                            <div
+                                class="bg-[#f3f3f3] rounded-lg text-center w-full md:w-fit xl:w-full 2xl:w-fit text-[#656565] p-3 flex flex-col gap-2">
                                 <div class="text-2xl font-bold">
                                     {{ $property->agent->units_count ?? 0 }}
                                 </div>
