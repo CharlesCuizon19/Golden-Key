@@ -86,10 +86,6 @@ class PageController extends Controller
             'units',
         ));
     }
-
-
-
-
     public function FAQs()
     {
         return view('pages.FAQs');
@@ -106,7 +102,8 @@ class PageController extends Controller
                 $q->withCount('units'); // << load units_count
             },
             'type',
-            'features'
+            'features',
+            'location',
         ])->findOrFail($id);
 
         $imageGallery_count = $property->images->count();
