@@ -69,14 +69,6 @@
                 <!-- Desktop Actions -->
                 <div class="items-center hidden space-x-4 lg:flex">
                     <x-direct-inquiry-modal />
-
-                    <button class="text-gray-700 hover:text-[#f37021] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button>
                 </div>
 
                 <!-- Mobile Hamburger -->
@@ -148,14 +140,6 @@
 
             <div class="items-center hidden space-x-4 md:flex">
                 <x-direct-inquiry-modal />
-
-                <button class="text-gray-700 hover:text-[#f37021] transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </button>
             </div>
         </div>
 

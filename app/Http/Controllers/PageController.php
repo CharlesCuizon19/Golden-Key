@@ -82,7 +82,8 @@ class PageController extends Controller
             'cities',
             'priceRanges',
             'areaRanges',
-            'sortOptions'
+            'sortOptions',
+            'units',
         ));
     }
 

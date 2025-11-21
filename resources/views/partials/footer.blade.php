@@ -1,14 +1,14 @@
 <div>
     <div class="relative">
-        <div class="relative min-h-screen lg:min-h-full">
+        <div class="relative min-h-screen 2xl:min-h-full">
             <img src="{{ asset('images/footer-img.png') }}" alt=""
-                class="object-cover w-auto h-screen lg:h-full lg:w-full">
+                class="object-cover w-auto h-screen 2xl:h-full lg:w-full">
             <div class="absolute inset-0 w-full h-full bg-gradient-to-t from-black to-transparent">
             </div>
         </div>
-        <div class="absolute inset-0 flex flex-col items-center justify-center gap-5 mx-3 lg:mx-0">
+        <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 mx-3 xl:gap-5 lg:mx-0">
             <div>
-                <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto h-[11rem]">
+                <img src="{{ asset('images/logo.png') }}" alt="" class="w-auto xl:h-[9rem] 2xl:h-[11rem]">
             </div>
             <div class="text-[#fcd97d] text-xl lg:text-2xl font-semibold">
                 Subscribe to Our
@@ -41,9 +41,9 @@
     </div>
 
     <div class="relative">
-        <div class="absolute w-full bg-[#181f27] lg:bg-transparent">
+        <div class="absolute w-full bg-[#181f27] 2xl:bg-transparent">
             <div class="border-t border-b mt-14 border-gray-400/60">
-                <div class="grid grid-cols-1 gap-10 mx-3 lg:gap-40 lg:mx-20 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-10 mx-3 2xl:gap-40 lg:mx-20 2xl:grid-cols-3">
                     <div class="relative z-10 flex flex-col border border-white">
                         <div class="flex flex-col justify-between h-full p-5 lg:p-12">
                             <div class="text-lg lg:text-[22px] leading-relaxed">
@@ -88,7 +88,7 @@
                                 class="object-cover w-full h-full">
                         </div>
                     </div>
-                    <div class="py-10 space-y-5">
+                    <div class="py-3 space-y-5 2xl:py-10">
                         <div class="flex flex-col items-start justify-center gap-4">
                             <div class="font-serif text-2xl text-white">
                                 Quick Links
@@ -167,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="py-10 space-y-5">
+                    <div class="py-3 space-y-5 2xl:py-10">
                         <div class="flex flex-col items-start justify-center gap-4">
                             <div class="font-serif text-2xl text-white">
                                 Get in Touch

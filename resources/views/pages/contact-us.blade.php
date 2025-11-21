@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute right-0 hidden -top-36 -z-10 xl:flex">
+                        <div class="absolute right-0 hidden -top-36 -z-10 2xl:flex">
                             <img src="{{ asset('images/contact-us-map.png') }}" alt="">
                         </div>
                     </div>

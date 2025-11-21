@@ -3,12 +3,12 @@
         <div class="mx-auto space-y-8 lg:px-8">
 
             <x-title title="Frequently Asked Questions" />
-            <div class="grid items-start grid-cols-1 gap-40 lg:grid-cols-2">
+            <div class="grid items-start grid-cols-1 gap-20 2xl:gap-40 xl:grid-cols-2">
                 <div class="flex flex-col gap-8">
                     <div class="text-3xl lg:text-5xl 2xl:text-7xl text-[#20272D] font-serif lg:w-[80%]">
                         Know More Before You Move In
                     </div>
-                    <div class="overflow-hidden shadow-md rounded-2xl w-full lg:w-[45rem] mt-4 lg:mt-20">
+                    <div class="overflow-hidden shadow-md rounded-2xl w-full lg:w-auto 2xl:w-[45rem] mt-4 lg:mt-20">
                         <img src="{{ asset('images/FAQ-img.png') }}" alt="City skyline"
                             class="object-cover w-full h-full">
                     </div>

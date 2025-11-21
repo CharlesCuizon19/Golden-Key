@@ -8,7 +8,7 @@
         </div>
 
         <!-- Swiper Container -->
-        <div class="swiper myPropertiesSwiper max-w-[90%]">
+        <div class="swiper myPropertiesSwiper w-full max-w-[90%]">
             <div class="swiper-wrapper">
                 @foreach ($locations as $location)
                     <div class="swiper-slide">
